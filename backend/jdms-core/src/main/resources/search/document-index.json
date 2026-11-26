@@ -1,0 +1,59 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "index.highlight.max_analyzed_offset": 5000000
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "dynamic_templates": [
+      {"custom_text": {"path_match": "custom_text.*", "mapping": {"type": "text",
+        "fields": {"raw": {"type": "keyword", "ignore_above": 256}, "en": {"type": "text", "analyzer": "english"},
+                   "ar": {"type": "text", "analyzer": "arabic"}}}}},
+      {"custom_keyword": {"path_match": "custom_keyword.*", "mapping": {"type": "keyword", "ignore_above": 256}}},
+      {"custom_number": {"path_match": "custom_number.*", "mapping": {"type": "double"}}},
+      {"custom_date": {"path_match": "custom_date.*", "mapping": {"type": "date", "format": "strict_date"}}},
+      {"custom_bool": {"path_match": "custom_bool.*", "mapping": {"type": "boolean"}}}
+    ],
+    "properties": {
+      "document_id": {"type": "keyword"},
+      "tenant_id": {"type": "keyword"},
+      "cabinet_id": {"type": "keyword"},
+      "cabinet_code": {"type": "keyword"},
+      "document_type_id": {"type": "keyword"},
+      "document_type_code": {"type": "keyword"},
+      "folder_id": {"type": "keyword"},
+      "status": {"type": "keyword"},
+      "classification": {"type": "keyword"},
+      "branch_id": {"type": "keyword"},
+      "branch_code": {"type": "keyword"},
+      "title": {"type": "text",
+        "fields": {"raw": {"type": "keyword", "ignore_above": 512}, "en": {"type": "text", "analyzer": "english"},
+                   "ar": {"type": "text", "analyzer": "arabic"}}},
+      "cif": {"type": "keyword"},
+      "customer_name": {"type": "text", "fields": {"raw": {"type": "keyword", "ignore_above": 256},
+        "ar": {"type": "text", "analyzer": "arabic"}}},
+      "account_no": {"type": "keyword"},
+      "collateral_code": {"type": "keyword"},
+      "contract_ref": {"type": "keyword"},
+      "transaction_ref": {"type": "keyword"},
+      "application_ref": {"type": "keyword"},
+      "external_ref": {"type": "keyword"},
+      "expiry_date": {"type": "date", "format": "strict_date"},
+      "created_at": {"type": "date"},
+      "updated_at": {"type": "date"},
+      "current_version_id": {"type": "keyword"},
+      "current_version": {"type": "keyword"},
+      "processing_status": {"type": "keyword"},
+      "has_text": {"type": "boolean"},
+      "on_legal_hold": {"type": "boolean"},
+      "content": {"type": "text",
+        "fields": {"en": {"type": "text", "analyzer": "english"}, "ar": {"type": "text", "analyzer": "arabic"}}},
+      "custom_text": {"type": "object", "dynamic": true},
+      "custom_keyword": {"type": "object", "dynamic": true},
+      "custom_number": {"type": "object", "dynamic": true},
+      "custom_date": {"type": "object", "dynamic": true},
+      "custom_bool": {"type": "object", "dynamic": true}
+    }
+  }
+}

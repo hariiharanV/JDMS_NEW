@@ -1,0 +1,43 @@
+# Secrets: only .env.example is committed
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# Java / Maven
+target/
+*.class
+*.log
+hs_err_pid*
+.mvn/wrapper/maven-wrapper.jar
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+frontend/blob-report/
+
+# IDEs and OS
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.DS_Store
+
+# Local tooling
+.claude/settings.local.json
+frontend/bom.json
+
+# Performance and rehearsal outputs (docs/perf/README.md); results worth keeping are copied into docs/perf/
+/build/
+perf/**/__pycache__/
+
+# Local HTTPS certificates (deploy/tls/make-local-cert.sh)
+deploy/tls/local/

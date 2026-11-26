@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JDMS Next Architecture",
+    "output": "jdms-next-architecture.html",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1390,
+      760
+    ],
+    "views": [
+      {
+        "id": "user-path",
+        "label": "User request path",
+        "focus": [
+          "spa",
+          "keycloak",
+          "core",
+          "postgres",
+          "opensearch",
+          "s3"
+        ],
+        "note": "A signed-in user reaches the core API; every read and write goes through AccessPolicy and is tenant-scoped."
+      },
+      {
+        "id": "processing",
+        "label": "Untrusted content processing",
+        "focus": [
+          "core",
+          "postgres",
+          "worker",
+          "clamav",
+          "tika",
+          "gotenberg",
+          "s3"
+        ],
+        "note": "The core never parses files: it enqueues jobs, the worker scans, extracts, OCRs and renders, then reports back."
+      },
+      {
+        "id": "integration",
+        "label": "Bank and migration clients",
+        "focus": [
+          "bank",
+          "migration",
+          "keycloak",
+          "core"
+        ],
+        "note": "FLEXCUBE-side systems and the legacy migration CLI call the same core API with OAuth2 client credentials."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "spa",
+      "type": "frontend",
+      "label": "Web UI",
+      "sublabel": "React + Vite · EN/AR RTL",
+      "pos": [
+        40,
+        250
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "bank",
+      "type": "external",
+      "label": "Bank systems",
+      "sublabel": "FLEXCUBE · integration API",
+      "pos": [
+        40,
+        408
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "migration",
+      "type": "backend",
+      "label": "jdms-migration",
+      "sublabel": "CLI · legacy JDMS import",
+      "pos": [
+        40,
+        566
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "keycloak",
+      "type": "security",
+      "label": "Keycloak",
+      "sublabel": "OIDC · client credentials",
+      "pos": [
+        325,
+        60
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "core",
+      "type": "backend",
+      "label": "jdms-core",
+      "sublabel": "Spring Modulith · Flowable",
+      "tag": "AccessPolicy on every call",
+      "pos": [
+        325,
+        400
+      ],
+      "size": [
+        170,
+        80
+      ]
+    },
+    {
+      "id": "opensearch",
+      "type": "database",
+      "label": "OpenSearch",
+      "sublabel": "permission-trimmed search",
+      "pos": [
+        620,
+        210
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "postgres",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "metadata · audit · job table",
+      "pos": [
+        620,
+        408
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "cloud",
+      "label": "SeaweedFS (S3)",
+      "sublabel": "envelope-encrypted blobs",
+      "pos": [
+        620,
+        606
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "worker",
+      "type": "backend",
+      "label": "jdms-worker",
+      "sublabel": "scan → extract → OCR → render",
+      "pos": [
+        915,
+        400
+      ],
+      "size": [
+        170,
+        80
+      ]
+    },
+    {
+      "id": "clamav",
+      "type": "security",
+      "label": "ClamAV",
+      "sublabel": "antivirus",
+      "pos": [
+        1210,
+        250
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "tika",
+      "type": "external",
+      "label": "Apache Tika",
+      "sublabel": "text · Tesseract OCR",
+      "pos": [
+        1210,
+        410
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "gotenberg",
+      "type": "external",
+      "label": "Gotenberg",
+      "sublabel": "PDF renditions",
+      "pos": [
+        1210,
+        570
+      ],
+      "size": [
+        140,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Data stores",
+      "wraps": [
+        "opensearch",
+        "postgres",
+        "s3"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "Untrusted content zone",
+      "wraps": [
+        "worker",
+        "clamav",
+        "tika",
+        "gotenberg"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "spa-login",
+      "from": "spa",
+      "to": "keycloak",
+      "label": "OIDC login",
+      "variant": "security"
+    },
+    {
+      "id": "spa-core",
+      "from": "spa",
+      "to": "core",
+      "label": "REST + JWT",
+      "variant": "emphasis"
+    },
+    {
+      "id": "bank-core",
+      "from": "bank",
+      "to": "core",
+      "label": "client credentials",
+      "labelDy": 13
+    },
+    {
+      "id": "migration-core",
+      "from": "migration",
+      "to": "core",
+      "label": "core API",
+      "variant": "dashed"
+    },
+    {
+      "id": "core-jwks",
+      "from": "core",
+      "to": "keycloak",
+      "label": "verify JWT",
+      "variant": "security"
+    },
+    {
+      "id": "core-postgres",
+      "from": "core",
+      "to": "postgres",
+      "label": "JPA · outbox",
+      "variant": "emphasis",
+      "labelDy": 13
+    },
+    {
+      "id": "core-search",
+      "from": "core",
+      "to": "opensearch",
+      "label": "index · query"
+    },
+    {
+      "id": "core-blobs",
+      "from": "core",
+      "to": "s3",
+      "label": "encrypted put/get"
+    },
+    {
+      "id": "worker-jobs",
+      "from": "worker",
+      "to": "postgres",
+      "label": "SKIP LOCKED jobs",
+      "variant": "emphasis"
+    },
+    {
+      "id": "worker-blobs",
+      "from": "worker",
+      "to": "s3",
+      "label": "versions · renditions"
+    },
+    {
+      "id": "worker-av",
+      "from": "worker",
+      "to": "clamav",
+      "label": "scan"
+    },
+    {
+      "id": "worker-tika",
+      "from": "worker",
+      "to": "tika",
+      "label": "extract · OCR",
+      "labelDy": 13
+    },
+    {
+      "id": "worker-pdf",
+      "from": "worker",
+      "to": "gotenberg",
+      "label": "render"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Core modules",
+      "items": [
+        "tenant · identity · metadata · document · access",
+        "workflow (Flowable BPMN/DMN) · records · audit",
+        "search · integration — talk via api packages or events"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Processing",
+      "items": [
+        "Jobs in PostgreSQL, claimed with FOR UPDATE SKIP LOCKED",
+        "Worker results return as jobs; core indexes OpenSearch",
+        "No Kafka in the PoC"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Security",
+      "items": [
+        "Every request tenant-scoped and checked by AccessPolicy",
+        "Per-object data key wrapped by a per-tenant KeyService key",
+        "Core never parses uploaded files"
+      ]
+    }
+  ]
+}

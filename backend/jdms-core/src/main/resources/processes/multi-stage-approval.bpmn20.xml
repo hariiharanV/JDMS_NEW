@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  multi-stage-approval (spec §4.4): ordered stages, each decided by a role. The stage plan comes from the
+  approval-stages DMN table and is evaluated again on every resubmission (amounts may have changed).
+  A REJECT or RETURN at any stage stops the remaining stages.
+-->
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="https://jdms.jmr.com/approval">
+  <process id="multi-stage-approval" name="Multi-stage approval" isExecutable="true">
+    <startEvent id="start"/>
+    <sequenceFlow id="toStages" sourceRef="start" targetRef="stage"/>
+
+    <userTask id="stage" name="Approval stage">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${approvalTaskSetup}"/>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="true"
+                                        flowable:collection="${approvalPlan.stages(execution)}"
+                                        flowable:elementVariable="stage">
+        <completionCondition>${decision != 'APPROVE'}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="toDecided" sourceRef="stage" targetRef="decided"/>
+
+    <exclusiveGateway id="decided"/>
+    <sequenceFlow id="decidedApprove" sourceRef="decided" targetRef="approved">
+      <conditionExpression xsi:type="tFormalExpression">${decision == 'APPROVE'}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="decidedReject" sourceRef="decided" targetRef="rejected">
+      <conditionExpression xsi:type="tFormalExpression">${decision == 'REJECT'}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="decidedReturn" sourceRef="decided" targetRef="returned">
+      <conditionExpression xsi:type="tFormalExpression">${decision == 'RETURN'}</conditionExpression>
+    </sequenceFlow>
+
+    <serviceTask id="approved" name="Approved" flowable:expression="${approvalOutcome.notify(execution, 'APPROVED')}"/>
+    <sequenceFlow id="toEndApproved" sourceRef="approved" targetRef="endApproved"/>
+    <endEvent id="endApproved"/>
+
+    <serviceTask id="rejected" name="Rejected" flowable:expression="${approvalOutcome.notify(execution, 'REJECTED')}"/>
+    <sequenceFlow id="toEndRejected" sourceRef="rejected" targetRef="endRejected"/>
+    <endEvent id="endRejected"/>
+
+    <serviceTask id="returned" name="Returned" flowable:expression="${approvalOutcome.notify(execution, 'RETURNED')}"/>
+    <sequenceFlow id="toAmend" sourceRef="returned" targetRef="amend"/>
+    <userTask id="amend" name="Amend and resubmit" flowable:assignee="${initiator}">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${approvalTaskSetup}"/>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="toResubmitted" sourceRef="amend" targetRef="resubmitted"/>
+    <serviceTask id="resubmitted" name="Resubmitted" flowable:expression="${approvalOutcome.notify(execution, 'RESUBMITTED')}"/>
+    <sequenceFlow id="backToStages" sourceRef="resubmitted" targetRef="stage"/>
+  </process>
+</definitions>

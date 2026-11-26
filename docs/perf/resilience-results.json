@@ -1,0 +1,270 @@
+{
+ "worker": {
+  "uploads": 30,
+  "created": 30,
+  "exactly_once": true,
+  "all_processed_s": 113.08526277542114,
+  "all_searchable_s": 3.7894299030303955,
+  "jobs": [
+   {
+    "type": "EXTRACT",
+    "status": "DONE",
+    "count": 30,
+    "max_attempts": 1
+   },
+   {
+    "type": "OCR",
+    "status": "DONE",
+    "count": 15,
+    "max_attempts": 1
+   },
+   {
+    "type": "PROCESSING_RESULT",
+    "status": "DONE",
+    "count": 105,
+    "max_attempts": 1
+   },
+   {
+    "type": "RENDER",
+    "status": "DONE",
+    "count": 30,
+    "max_attempts": 1
+   },
+   {
+    "type": "SCAN",
+    "status": "DONE",
+    "count": 30,
+    "max_attempts": 2
+   }
+  ],
+  "dead_or_failed": 0,
+  "killed_after_s": 1.2933261394500732,
+  "worker_steps_running_when_killed": 2,
+  "all_processed_after_kill_s": 124.5,
+  "duration_s": 138.9
+ },
+ "opensearch": {
+  "uploads": 20,
+  "created": 20,
+  "exactly_once": true,
+  "all_processed_s": 0.6755285263061523,
+  "all_searchable_s": 24.02438998222351,
+  "jobs": [
+   {
+    "type": "EXTRACT",
+    "status": "DONE",
+    "count": 20,
+    "max_attempts": 1
+   },
+   {
+    "type": "INDEX",
+    "status": "DONE",
+    "count": 80,
+    "max_attempts": 4
+   },
+   {
+    "type": "INDEX",
+    "status": "RUNNING",
+    "count": 4,
+    "max_attempts": 4
+   },
+   {
+    "type": "PROCESSING_RESULT",
+    "status": "DONE",
+    "count": 60,
+    "max_attempts": 1
+   },
+   {
+    "type": "RENDER",
+    "status": "DONE",
+    "count": 20,
+    "max_attempts": 1
+   },
+   {
+    "type": "SCAN",
+    "status": "DONE",
+    "count": 20,
+    "max_attempts": 1
+   }
+  ],
+  "dead_or_failed": 0,
+  "upload_statuses": [
+   "201"
+  ],
+  "search_during_restart": [
+   "200",
+   "503 SEARCH_UNAVAILABLE"
+  ],
+  "opensearch_healthy_after_s": 55.5,
+  "duration_s": 85.7
+ },
+ "s3": {
+  "uploads": 15,
+  "created": 15,
+  "exactly_once": true,
+  "all_processed_s": 30.96966576576233,
+  "all_searchable_s": 2.771442174911499,
+  "jobs": [
+   {
+    "type": "EXTRACT",
+    "status": "DONE",
+    "count": 15,
+    "max_attempts": 3
+   },
+   {
+    "type": "PROCESSING_RESULT",
+    "status": "DONE",
+    "count": 45,
+    "max_attempts": 1
+   },
+   {
+    "type": "RENDER",
+    "status": "DONE",
+    "count": 15,
+    "max_attempts": 1
+   },
+   {
+    "type": "SCAN",
+    "status": "DONE",
+    "count": 15,
+    "max_attempts": 3
+   }
+  ],
+  "dead_or_failed": 0,
+  "outage_s": 30.6,
+  "attempts_during_outage": [
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ],
+   [
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    "503 STORAGE_UNAVAILABLE",
+    201
+   ]
+  ],
+  "first_answer_during_outage": [
+   "503 STORAGE_UNAVAILABLE"
+  ],
+  "duration_s": 102.7
+ }
+}

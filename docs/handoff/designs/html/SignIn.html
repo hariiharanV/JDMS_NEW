@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4E89}a:hover{color:#13294B}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F6F7F9; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #1B2230; display: flex; flex-wrap: wrap">
+
+  <section aria-label="JDMS Next" style="flex: 1 1 420px; background: #13294B; color: #FFFFFF; padding: 48px 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; min-height: 320px">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <div style="font-size: 26px; font-weight: 600"><span style="color: #E0B456">JDMS</span> Next</div>
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: #13294B; background: #E0B456; border-radius: 4px; padding: 3px 8px">LOCAL DEVELOPMENT</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 520px">
+      <h1 style="margin: 0; font-size: 40px; line-height: 1.15; font-weight: 600">Secure, bilingual document management for banks</h1>
+      <p lang="ar" dir="rtl" style="margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 22px; line-height: 1.5; color: #C6D0DF; text-align: right">إدارة مستندات آمنة وثنائية اللغة للبنوك</p>
+    </div>
+    <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 14px; color: #C6D0DF">
+      <li style="display: flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E0B456" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Encrypted per file</li>
+      <li style="display: flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E0B456" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg>Every action audited</li>
+      <li style="display: flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E0B456" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"></path><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"></path></svg>Maker-checker approvals</li>
+    </ul>
+  </section>
+
+  <main style="flex: 1 1 480px; display: flex; align-items: center; justify-content: center; padding: 48px 24px; box-sizing: border-box">
+    <div style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+        <div style="font-size: 14px; color: #4A5363">[Bank display name]</div>
+        <div role="group" aria-label="Language" style="display: flex; background: #E8EBEF; border-radius: 8px; padding: 3px">
+          <button aria-pressed="true" style="font: inherit; font-size: 13px; border: 0; border-radius: 6px; padding: 6px 12px; background: #FFFFFF; color: #13294B; font-weight: 600">English</button>
+          <button aria-pressed="false" lang="ar" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 13px; border: 0; border-radius: 6px; padding: 6px 12px; background: transparent; color: #1B2230">العربية</button>
+        </div>
+      </div>
+
+      <div>
+        <h2 style="margin: 0; font-size: 28px; font-weight: 600; color: #13294B">Sign in</h2>
+        <p style="margin: 6px 0 0; font-size: 14px; color: #4A5363">Use your bank network account.</p>
+      </div>
+
+      <form style="display: flex; flex-direction: column; gap: 18px">
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Username or email
+          <input autocomplete="username" style="font: inherit; font-size: 15px; height: 46px; box-sizing: border-box; border: 1px solid #C9D2DE; border-radius: 8px; padding: 0 14px; color: #1B2230; background: #FFFFFF; outline: 2px solid #C79A3B; outline-offset: 1px"></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Password
+          <span style="display: flex; align-items: center; height: 46px; box-sizing: border-box; border: 1px solid #C9D2DE; border-radius: 8px; background: #FFFFFF; padding: 0 4px 0 14px">
+            <input type="password" autocomplete="current-password" style="font: inherit; font-size: 15px; border: 0; outline: 0; flex: 1; min-width: 0; background: transparent; color: #1B2230">
+            <button type="button" aria-label="Show password" style="width: 40px; height: 40px; border: 0; background: transparent; color: #4A5363; display: flex; align-items: center; justify-content: center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+          </span>
+        </label>
+        <button type="submit" style="font: inherit; font-size: 15px; font-weight: 600; height: 48px; border: 0; border-radius: 8px; background: #1D4E89; color: #FFFFFF; margin-top: 4px">Sign in</button>
+      </form>
+
+      <div style="border-top: 1px solid #DCE0E6; padding-top: 18px; font-size: 13px; line-height: 1.5; color: #4A5363">Having trouble signing in? Contact [your IT service desk]. Your session ends after a period of inactivity.</div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

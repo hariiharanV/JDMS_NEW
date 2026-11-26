@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JDMS Next design review</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4E89}a:hover{color:#13294B}
+</style>
+</head>
+<body>
+<div style="width: 1440px; box-sizing: border-box; padding: 72px 80px 80px; background: #F6F7F9; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #1B2230; display: flex; flex-direction: column; gap: 48px">
+
+  <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; border-bottom: 1px solid #DCE0E6; padding-bottom: 32px">
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 820px">
+      <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8A5A00">JDMS Next · UI review · October 2026</div>
+      <h1 style="margin: 0; font-size: 44px; line-height: 1.1; font-weight: 600; color: #13294B">The product is solid. The screens make people work too hard to see it.</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #4A5363">Reviewed from the 28 user-manual screenshots (maker, checker, records officer, administrator). Nine findings, then four redesigned screens to the right: Home, Tasks, Document and Upload.</p>
+    </div>
+    <div style="display: flex; gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 16px 20px; min-width: 120px">
+        <div style="font-size: 32px; font-weight: 600; color: #A12B2B">4</div>
+        <div style="font-size: 13px; color: #4A5363">High priority</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 16px 20px; min-width: 120px">
+        <div style="font-size: 32px; font-weight: 600; color: #8A5A00">5</div>
+        <div style="font-size: 13px; color: #4A5363">Medium priority</div>
+      </div>
+    </div>
+  </header>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+    <div style="background: #FFFFFF; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #DCE0E6">
+      <div style="font-size: 13px; font-weight: 600; color: #1F6B3A; text-transform: uppercase; letter-spacing: 0.06em">Keep</div>
+      <div style="font-size: 16px; font-weight: 600">Navy + gold identity</div>
+      <div style="font-size: 14px; line-height: 1.5; color: #4A5363">Reads as a bank, not a startup. The redesign keeps it and uses gold only for focus and the active nav item.</div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #DCE0E6">
+      <div style="font-size: 13px; font-weight: 600; color: #1F6B3A; text-transform: uppercase; letter-spacing: 0.06em">Keep</div>
+      <div style="font-size: 16px; font-weight: 600">IBM Plex Sans, true RTL</div>
+      <div style="font-size: 14px; line-height: 1.5; color: #4A5363">Plex has a matching Arabic family; the Arabic home already mirrors properly. Every proposal below mirrors the same way.</div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #DCE0E6">
+      <div style="font-size: 13px; font-weight: 600; color: #1F6B3A; text-transform: uppercase; letter-spacing: 0.06em">Keep</div>
+      <div style="font-size: 16px; font-weight: 600">Type-driven forms</div>
+      <div style="font-size: 14px; line-height: 1.5; color: #4A5363">Passport-specific fields appearing for passports is exactly right. The fix is order and grouping, not the model.</div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-size: 24px; color: #13294B">Findings</h2>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FBE7E7; color: #A12B2B; padding: 3px 8px; border-radius: 4px">High</span>
+          <span style="font-size: 13px; color: #5B6472">01 · All screens</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Top-tab navigation won't hold the full product</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">Makers see 5 tabs, but records officers and admins add Recycle bin, Records, Administration and Audit. A single row of tabs runs out of room, and in Arabic it gets worse. There's no global search, and the user name isn't a menu.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> a grouped left sidebar (Work · Find · Governance · Admin) with task count badges, plus a global search in the top bar that understands title, CIF and document number.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FBE7E7; color: #A12B2B; padding: 3px 8px; border-radius: 4px">High</span>
+          <span style="font-size: 13px; color: #5B6472">02 · Tasks inbox &amp; drawer</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Checkers approve without seeing the document</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">The task drawer shows "Approval, round 1", one history line and three buttons. To judge a passport, the checker has to open the document in another view and come back. The Kind and Stage columns repeat "Approval", and Subject repeats the item text.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> a split inbox. The list on the left has due-date chips and filters; the right side shows the preview, the key fields beside it and a sticky decision bar. Reject requires a reason.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FBE7E7; color: #A12B2B; padding: 3px 8px; border-radius: 4px">High</span>
+          <span style="font-size: 13px; color: #5B6472">03 · Document page</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Delete is as loud as Download, and the preview is hidden on a tab</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">The buttons sit next to the status badges at title height, and a red-outlined Delete is one click from Download. The Details tab is a grey 4-column label/value table with 60% of the screen empty below it. You have to go to the Viewer tab to see the document at all.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> two panes, preview left and facts right. One primary action, Delete moved into a "More" menu, and approval history as a timeline under the facts.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FBE7E7; color: #A12B2B; padding: 3px 8px; border-radius: 4px">High</span>
+          <span style="font-size: 13px; color: #5B6472">04 · Status &amp; classification badges</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Badges fail contrast and repeat on every row</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">The small green "Active" and amber "Pending approval" text on pale fills is roughly 3:1, below WCAG AA for 12px text. "Confidential" is the same outlined badge on every row, so it carries no information and pulls the eye away from status.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> darker chip text (≥4.5:1) with a status dot so it isn't colour alone. Classification becomes a quiet lock icon and label, emphasised only above the bank default.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FDF1D8; color: #8A5A00; padding: 3px 8px; border-radius: 4px">Medium</span>
+          <span style="font-size: 13px; color: #5B6472">05 · Home</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Home is two lists, and one of them is clipped</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">"My tasks (9)" shows five identical "Amend and resubmit" rows with no urgency. The Recent documents table cuts the Created column off and scrolls sideways inside its card. There's no summary of where your work stands.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> status counters you can click to filter, tasks grouped by action with due chips, and a 5-column recent table that fits.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FDF1D8; color: #8A5A00; padding: 3px 8px; border-radius: 4px">Medium</span>
+          <span style="font-size: 13px; color: #5B6472">06 · Upload</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">The file comes last on a 20-field form</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">Five optional references (account, collateral, contract, transaction, application) sit between the required fields. The drop zone and the Upload button are at the bottom, and the maker isn't told who will approve the upload.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> file first, required fields next and optional references folded away. A side summary shows the checks passed and the approval route before submitting.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FDF1D8; color: #8A5A00; padding: 3px 8px; border-radius: 4px">Medium</span>
+          <span style="font-size: 13px; color: #5B6472">07 · Search</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Result rows are unlabelled codes</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">"PASSPORT  HMVNNT8YN495  001  25 Oct 2026": which one is the CIF and which is the branch? Facets show raw codes (PASSPORT, CUSTOMERS) as plain text links, there's no sort, and CIF has its own search box beside the main one.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> labelled metadata (CIF · Branch · Created), display names, checkbox facets with counts, sort control, and a single search box that recognises a CIF.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FDF1D8; color: #8A5A00; padding: 3px 8px; border-radius: 4px">Medium</span>
+          <span style="font-size: 13px; color: #5B6472">08 · Sign-in</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Sign-in is the stock Keycloak theme</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">The first screen a bank sees is a dark polygon background with "JDMS NEXT (LOCAL DEVELOPMENT)" in spaced capitals and a different blue from the app.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #1B2230"><strong>Fix:</strong> a small custom Keycloak login theme using the same navy, logo, font and English/Arabic switch. Show the environment as a small tag, not the title.</p>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px; grid-column: span 2">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="font-size: 12px; font-weight: 600; background: #FDF1D8; color: #8A5A00; padding: 3px 8px; border-radius: 4px">Medium</span>
+          <span style="font-size: 13px; color: #5B6472">09 · Visual system</span>
+        </div>
+        <h3 style="margin: 0; font-size: 18px">Codes and formats leak into the UI</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5363">Raw codes appear where people read: "BANK1", "PASSPORT", "(PASSPORT)" after every task title, "001" for branch. Dates appear as both "2031-05-31" and "25 Oct 2026, 22:31". Page titles, table headers and body text are all close in weight, so nothing leads the eye.</p>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-top: 8px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="font-size: 12px; color: #5B6472">Codes → names</div>
+            <div style="font-size: 14px">PASSPORT → Passport<br>001 → Muscat Main (001)<br>BANK1 → bank display name</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="font-size: 12px; color: #5B6472">One date format</div>
+            <div style="font-size: 14px">31 May 2031<br>25 Oct 2026, 22:31<br>"2 h ago" in lists, exact on hover</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="font-size: 12px; color: #5B6472">Type scale (Plex Sans)</div>
+            <div style="font-size: 14px">28/600 page · 18/600 section<br>14/400 body · 12/500 label</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="font-size: 12px; color: #5B6472">Palette</div>
+            <div style="display: flex; gap: 6px">
+              <div style="width: 36px; height: 36px; border-radius: 6px; background: #13294B" title="Navy #13294B"></div>
+              <div style="width: 36px; height: 36px; border-radius: 6px; background: #1D4E89" title="Action #1D4E89"></div>
+              <div style="width: 36px; height: 36px; border-radius: 6px; background: #C79A3B" title="Gold #C79A3B"></div>
+              <div style="width: 36px; height: 36px; border-radius: 6px; background: #F6F7F9; border: 1px solid #DCE0E6" title="Ground #F6F7F9"></div>
+              <div style="width: 36px; height: 36px; border-radius: 6px; background: #1B2230" title="Ink #1B2230"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-size: 24px; color: #13294B">Status chips: before and after</h2>
+    <div style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: grid; grid-template-columns: 140px repeat(5, minmax(0, 1fr)); gap: 16px; align-items: center">
+      <div style="font-size: 13px; color: #5B6472">Today</div>
+      <span style="justify-self: start; font-size: 12px; font-weight: 600; background: #EAF6EC; color: #3E9A55; padding: 3px 8px; border-radius: 4px">Active</span>
+      <span style="justify-self: start; font-size: 12px; font-weight: 600; background: #FDF3DF; color: #C08A1E; padding: 3px 8px; border-radius: 4px">Pending approval</span>
+      <span style="justify-self: start; font-size: 12px; font-weight: 600; background: #F0F1F3; color: #6B7280; padding: 3px 8px; border-radius: 4px">Draft</span>
+      <span style="justify-self: start; font-size: 12px; font-weight: 600; background: #FBEAEA; color: #D05A5A; padding: 3px 8px; border-radius: 4px">Deleted</span>
+      <span style="justify-self: start; font-size: 12px; font-weight: 600; border: 1px solid #13294B; color: #13294B; padding: 2px 7px; border-radius: 4px">Confidential</span>
+
+      <div style="font-size: 13px; color: #5B6472">Proposed</div>
+      <span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #E6F4EA; color: #1F6B3A; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #1F6B3A"></span>Active</span>
+      <span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #FDF1D8; color: #7A4F00; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B07400"></span>Pending approval</span>
+      <span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #EEF0F3; color: #3F4754; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid #3F4754; box-sizing: border-box"></span>Draft</span>
+      <span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #FBE7E7; color: #9A2626; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 1px; background: #9A2626"></span>Deleted</span>
+      <span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #4A5363"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Confidential</span>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-size: 24px; color: #13294B">Full scale: every status and classification</h2>
+    <div style="background: #FFFFFF; border: 1px solid #DCE0E6; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 13px; color: #5B6472">Document status: the text is always shown, and the dot shape tells the families apart without colour</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #EEF0F3; color: #3F4754; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid #3F4754; box-sizing: border-box"></span>Draft</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #FDF1D8; color: #7A4F00; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B07400"></span>Pending approval</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #E6F4EA; color: #1F6B3A; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #1F6B3A"></span>Active</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #FBE7E7; color: #9A2626; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 1px; background: #9A2626"></span>Rejected</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #FBE7E7; color: #9A2626; padding: 3px 8px; border-radius: 999px"><span style="width: 6px; height: 6px; border-radius: 1px; border: 1.5px solid #9A2626; box-sizing: border-box"></span>Deleted</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #EEF0F3; color: #3F4754; padding: 3px 8px; border-radius: 999px"><span style="width: 8px; height: 2px; border-radius: 1px; background: #3F4754"></span>Disposed</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid #E8EBEF; padding-top: 20px">
+        <div style="font-size: 13px; color: #5B6472">Classification: gets heavier as the level rises. In lists, show it only when it's above the type's minimum.</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center">
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 400; color: #4A5363"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>Public</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5363"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Internal</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1B2230; background: #EEF0F3; padding: 3px 10px; border-radius: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Confidential</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #FFFFFF; background: #13294B; padding: 3px 10px; border-radius: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none"></path></svg>Restricted</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Performance runs (B-13, docs/perf/README.md): OpenSearch with a 2 GB heap instead of the 512 MB development default.
+#   docker compose -f deploy/docker-compose.yml -f perf/docker-compose.perf.yml up -d --wait opensearch
+services:
+  opensearch:
+    environment:
+      OPENSEARCH_JAVA_OPTS: "-Xms2g -Xmx2g"

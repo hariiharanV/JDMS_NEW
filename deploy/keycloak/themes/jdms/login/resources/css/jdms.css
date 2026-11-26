@@ -1,0 +1,382 @@
+/*
+ * JDMS Next sign-in (UI handoff §6.11): a navy brand panel beside the form, the app's tokens (frontend/src/index.css),
+ * the self-hosted IBM Plex fonts (OFL-1.1, fonts/OFL.txt), logical properties only so Arabic mirrors.
+ */
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2"); }
+
+:root {
+  --jdms-navy: #13294b;
+  --jdms-navy-700: #22395f;
+  --jdms-gold: #e0b456;
+  --jdms-action: #1d4e89;
+  --jdms-ink: #1b2230;
+  --jdms-ink-2: #4a5363;
+  --jdms-ground: #f6f7f9;
+  --jdms-surface: #fff;
+  --jdms-border-strong: #c9d2de;
+  --jdms-divider: #e8ebef;
+  --jdms-danger-fg: #9a2626;
+  --jdms-danger-bg: #fbe7e7;
+  --jdms-success-fg: #1f6b3a;
+  --jdms-success-bg: #e6f4ea;
+  --jdms-warning-fg: #7a4f00;
+  --jdms-warning-bg: #fdf1d8;
+  --jdms-font: "IBM Plex Sans", system-ui, sans-serif;
+  --pf-v5-global--FontFamily--text: var(--jdms-font);
+  --pf-v5-global--FontFamily--heading: var(--jdms-font);
+  --pf-v5-global--primary-color--100: var(--jdms-action);
+  --pf-v5-global--primary-color--200: var(--jdms-navy-700);
+  --pf-v5-global--link--Color: var(--jdms-action);
+}
+
+html[lang="ar"] {
+  --jdms-font: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+}
+
+body.jdms-login {
+  margin: 0;
+  background: var(--jdms-ground);
+  color: var(--jdms-ink);
+  font-family: var(--jdms-font);
+  line-height: 1.5;
+}
+
+/* the skip link appears when it gets focus */
+.jdms-skip {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-start: 8px;
+  z-index: 10;
+  padding: 8px 14px;
+  background: var(--jdms-surface);
+  color: var(--jdms-navy);
+  border-radius: 8px;
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.jdms-skip:focus {
+  transform: none;
+}
+
+/* one gold focus ring, as in the app */
+.jdms-login :focus-visible {
+  outline: 3px solid var(--jdms-gold) !important;
+  outline-offset: 2px;
+}
+
+.jdms-login .pf-v5-c-form-control:focus-within {
+  outline: 3px solid var(--jdms-gold);
+  outline-offset: 1px;
+}
+
+.jdms-login .pf-v5-c-form-control input:focus-visible {
+  outline: none !important;
+}
+
+.jdms-split {
+  display: grid;
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+  min-block-size: 100vh;
+}
+
+/* ---- brand panel ---- */
+
+.jdms-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 48px 56px;
+  background: var(--jdms-navy);
+  color: #fff;
+}
+
+.jdms-brand-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.jdms-wordmark {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.jdms-wordmark-mark {
+  color: var(--jdms-gold);
+}
+
+.jdms-env {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--jdms-gold);
+  color: var(--jdms-navy);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.jdms-claim {
+  max-inline-size: 34rem;
+}
+
+.jdms-headline {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.jdms-headline-other {
+  margin: 14px 0 0;
+  font-size: 20px;
+  color: #c6d0df;
+}
+
+.jdms-headline-other[lang="ar"] {
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+.jdms-headline-other[lang="en"] {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+.jdms-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: #e3e8f0;
+}
+
+.jdms-points li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jdms-points svg {
+  inline-size: 16px;
+  block-size: 16px;
+  fill: none;
+  stroke: var(--jdms-gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- form panel ---- */
+
+.jdms-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.jdms-box {
+  inline-size: 100%;
+  max-inline-size: 420px;
+}
+
+.jdms-box-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-block-end: 40px;
+  font-size: 14px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-locales {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 8px;
+  background: #e8ebef;
+}
+
+.jdms-locales a {
+  padding: 4px 12px;
+  border-radius: 6px;
+  color: var(--jdms-ink);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.jdms-locales a[lang="ar"] {
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+.jdms-locales a[aria-current="true"] {
+  background: var(--jdms-surface);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgb(20 30 50 / 12%);
+}
+
+h1.jdms-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--jdms-navy);
+}
+
+.jdms-subtitle {
+  margin: 4px 0 28px;
+  font-size: 14px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-required {
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-login .pf-v5-c-form__label-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jdms-ink);
+}
+
+.jdms-login .pf-v5-c-form-control {
+  --pf-v5-c-form-control--BorderRadius: 8px;
+  --pf-v5-c-form-control--before--BorderColor: var(--jdms-border-strong);
+  --pf-v5-c-form-control--before--BorderStyle: solid;
+  --pf-v5-c-form-control--after--BorderColor: transparent;
+  --pf-v5-c-form-control--hover--after--BorderColor: transparent;
+  --pf-v5-c-form-control--focus--after--BorderColor: transparent;
+  --pf-v5-c-form-control--focus--after--BorderWidth: 0;
+  min-block-size: 48px;
+  background: var(--jdms-surface);
+  border-radius: 8px;
+}
+
+.jdms-login .pf-v5-c-form-control > input {
+  font-size: 15px;
+}
+
+/* a whole border, not PatternFly's underline */
+.jdms-login .pf-v5-c-form-control {
+  border: 1px solid var(--jdms-border-strong);
+}
+
+.jdms-login .pf-v5-c-form-control::before,
+.jdms-login .pf-v5-c-form-control::after {
+  display: none;
+}
+
+/* the password and its show/hide button read as one field */
+.jdms-login .pf-v5-c-input-group .pf-v5-c-form-control {
+  border-inline-end: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.jdms-login .pf-v5-c-input-group .pf-v5-c-button.pf-m-control {
+  min-inline-size: 48px;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border-strong);
+  border-inline-start: 0;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: 8px;
+  border-end-end-radius: 8px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-login .pf-v5-c-input-group .pf-v5-c-button.pf-m-control::after {
+  display: none;
+}
+
+.jdms-login .pf-v5-c-button {
+  --pf-v5-c-button--BorderRadius: 8px;
+  font-family: var(--jdms-font);
+}
+
+.jdms-login .pf-v5-c-button.pf-m-primary {
+  --pf-v5-c-button--m-primary--BackgroundColor: var(--jdms-action);
+  --pf-v5-c-button--m-primary--hover--BackgroundColor: var(--jdms-navy-700);
+  --pf-v5-c-button--m-primary--focus--BackgroundColor: var(--jdms-navy-700);
+  min-block-size: 48px;
+  font-weight: 600;
+}
+
+.jdms-login #kc-form-buttons {
+  margin-block-start: 8px;
+}
+
+.jdms-message {
+  margin-block-end: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.jdms-message-error { background: var(--jdms-danger-bg); color: var(--jdms-danger-fg); }
+.jdms-message-success { background: var(--jdms-success-bg); color: var(--jdms-success-fg); }
+.jdms-message-warning,
+.jdms-message-info { background: var(--jdms-warning-bg); color: var(--jdms-warning-fg); }
+
+.jdms-info {
+  margin-block-start: 20px;
+  font-size: 14px;
+}
+
+.jdms-help {
+  margin: 28px 0 0;
+  padding-block-start: 20px;
+  border-block-start: 1px solid var(--jdms-divider);
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+/* the two halves stack below 900 px; the brand panel shrinks to a band */
+@media (max-width: 899px) {
+  .jdms-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jdms-brand {
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .jdms-headline {
+    font-size: 26px;
+  }
+
+  .jdms-headline-other {
+    font-size: 16px;
+  }
+
+  .jdms-panel {
+    align-items: flex-start;
+    padding: 32px 16px;
+  }
+
+  .jdms-box-top {
+    margin-block-end: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jdms-login *,
+  .jdms-login *::before,
+  .jdms-login *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

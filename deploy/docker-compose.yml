@@ -1,0 +1,167 @@
+# Local development dependencies for JDMS Next. Every port is bound to 127.0.0.1 only.
+# Secrets come from deploy/.env (copy deploy/.env.example); compose refuses to start if one is missing.
+#   docker compose -f deploy/docker-compose.yml up -d --wait
+# Image versions are pinned; keep postgres in step with test.image.postgres in backend/pom.xml.
+name: jdms
+
+services:
+  postgres:
+    image: postgres:18.6-alpine3.24
+    # parallel queries use /dev/shm; Docker's 64 MB default fails them on large tables (B-13)
+    shm_size: 256mb
+    environment:
+      POSTGRES_DB: ${JDMS_DB_NAME:-jdms}
+      # Schema owner (runs migrations); the applications connect as JDMS_DB_USERNAME (ADR-0018)
+      POSTGRES_USER: ${JDMS_DB_OWNER_USERNAME:-jdms}
+      POSTGRES_PASSWORD: ${JDMS_DB_OWNER_PASSWORD:?set JDMS_DB_OWNER_PASSWORD in deploy/.env}
+      JDMS_DB_USERNAME: ${JDMS_DB_USERNAME:-jdms_app}
+      JDMS_DB_PASSWORD: ${JDMS_DB_PASSWORD:?set JDMS_DB_PASSWORD in deploy/.env}
+      TZ: UTC
+    ports:
+      - "127.0.0.1:${JDMS_DB_PORT:-5432}:5432"
+    volumes:
+      # PostgreSQL 18+ images keep data under /var/lib/postgresql/<major>
+      - postgres-data:/var/lib/postgresql
+      # Creates the application user on first start (empty data directory only)
+      - ./postgres/create-app-user.sh:/docker-entrypoint-initdb.d/10-create-app-user.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  keycloak:
+    image: keycloak/keycloak:26.8.1
+    # Development mode with its own embedded store; the realm is re-imported from deploy/keycloak on start
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?set KC_BOOTSTRAP_ADMIN_PASSWORD in deploy/.env}
+      KC_HEALTH_ENABLED: "true"
+      # the environment tag on the sign-in page; leave empty where no tag should show
+      JDMS_ENV_LABEL: ${JDMS_ENV_LABEL-LOCAL DEVELOPMENT}
+      # Resolved by Keycloak inside deploy/keycloak/jdms-local-realm.json at import
+      JDMS_DEV_USER_PASSWORD: ${JDMS_DEV_USER_PASSWORD:?set JDMS_DEV_USER_PASSWORD in deploy/.env}
+      JDMS_INTEGRATION_TEST_CLIENT_SECRET: ${JDMS_INTEGRATION_TEST_CLIENT_SECRET:?set JDMS_INTEGRATION_TEST_CLIENT_SECRET in deploy/.env}
+      JDMS_MIGRATION_CLIENT_SECRET: ${JDMS_MIGRATION_CLIENT_SECRET:?set JDMS_MIGRATION_CLIENT_SECRET in deploy/.env}
+      KC_HTTP_PORT: "8080"
+      # Fixed issuer, whether tokens are requested via localhost, 127.0.0.1 or the network address
+      # (must match jdms.security.issuer-uri)
+      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:${KEYCLOAK_PORT:-8180}}
+      # Network access (deploy/tls/README.md): the web address allowed to sign in, and the HTTPS certificate
+      JDMS_WEB_PUBLIC_URL: ${JDMS_WEB_PUBLIC_URL:-http://localhost:5180}
+      #KC_HTTPS_CERTIFICATE_FILE: ${KC_HTTPS_CERTIFICATE_FILE:-}
+      #KC_HTTPS_CERTIFICATE_KEY_FILE: ${KC_HTTPS_CERTIFICATE_KEY_FILE:-}
+      # Health checks stay on plain HTTP inside the container when HTTPS is on
+      KC_HTTP_MANAGEMENT_SCHEME: http
+    ports:
+      - "127.0.0.1:${KEYCLOAK_PORT:-8180}:8080"
+      # HTTPS, only when a certificate is configured; this machine only unless JDMS_BIND_ADDRESS opens it
+      - "${JDMS_BIND_ADDRESS:-127.0.0.1}:${KEYCLOAK_HTTPS_PORT:-8543}:8443"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import:ro
+      # the JDMS login theme (UI handoff §6.11); the realm import names it as the login theme
+      - ./keycloak/themes:/opt/keycloak/themes:ro
+      - ./tls/local:/opt/keycloak/conf/local-tls:ro
+    healthcheck:
+      # No curl in the image: plain HTTP over bash /dev/tcp against the management port
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && grep -q '\"UP\"' <&3"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  opensearch:
+    image: opensearchproject/opensearch:3.9.0
+    environment:
+      discovery.type: single-node
+      # Local development only: no TLS or authentication. Production uses the security plugin.
+      DISABLE_SECURITY_PLUGIN: "true"
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ulimits:
+      memlock: { soft: -1, hard: -1 }
+      nofile: { soft: 65536, hard: 65536 }
+    ports:
+      - "127.0.0.1:${OPENSEARCH_PORT:-9200}:9200"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS 'http://127.0.0.1:9200/_cluster/health?wait_for_status=yellow&timeout=5s' >/dev/null"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 20s
+
+  seaweedfs:
+    # S3-compatible object store for local development (ADR-0003)
+    image: chrislusf/seaweedfs:4.48
+    entrypoint: ["/bin/sh", "-c"]
+    # Writes the S3 identity file from environment variables, then starts master, volume, filer and S3 gateway
+    command:
+      - >-
+        printf '{"identities":[{"name":"jdms","credentials":[{"accessKey":"%s","secretKey":"%s"}],"actions":["Admin","Read","List","Tagging","Write"]}]}'
+        "$$JDMS_S3_ACCESS_KEY" "$$JDMS_S3_SECRET_KEY" > /tmp/s3.json &&
+        exec weed server -dir=/data -ip.bind=0.0.0.0 -s3 -s3.port=8333 -s3.config=/tmp/s3.json
+    environment:
+      JDMS_S3_ACCESS_KEY: ${JDMS_S3_ACCESS_KEY:?set JDMS_S3_ACCESS_KEY in deploy/.env}
+      JDMS_S3_SECRET_KEY: ${JDMS_S3_SECRET_KEY:?set JDMS_S3_SECRET_KEY in deploy/.env}
+    ports:
+      - "127.0.0.1:${S3_PORT:-8333}:8333"
+    volumes:
+      - seaweedfs-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8333/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  clamav:
+    image: clamav/clamav:1.5.4
+    environment:
+      # at least the worker's maximum input size (JDMS_WORKER_MAX_INPUT_MB, default 100)
+      CLAMD_CONF_StreamMaxLength: 110M
+      CLAMD_CONF_MaxFileSize: 110M
+      CLAMD_CONF_MaxScanSize: 400M
+    ports:
+      - "127.0.0.1:${CLAMAV_PORT:-3310}:3310"
+    volumes:
+      - clamav-db:/var/lib/clamav
+    healthcheck:
+      test: ["CMD-SHELL", "clamdcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      # First start downloads the signature database
+      start_period: 360s
+
+  tika:
+    # apache/tika:3.3.3.0-full plus Tesseract Arabic (deploy/tika/Dockerfile)
+    image: jdms-tika:3.3.3.0-ara
+    build: ./tika
+    ports:
+      - "127.0.0.1:${TIKA_PORT:-9998}:9998"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:9998/version"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  gotenberg:
+    image: gotenberg/gotenberg:8.38.1
+    ports:
+      - "127.0.0.1:${GOTENBERG_PORT:-3300}:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:3000/health >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  postgres-data:
+  opensearch-data:
+  seaweedfs-data:
+  clamav-db:

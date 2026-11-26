@@ -1,0 +1,45 @@
+# JDMS Next migration tool (ADR-0020). Every secret comes from the environment; the legacy secret from a file.
+spring:
+  application:
+    name: jdms-migration
+  main:
+    web-application-type: none
+    banner-mode: off
+    # a command builds only what it needs: no database, files or secret are touched without one
+    lazy-initialization: true
+  # the legacy JDMS database: read-only (Oracle in real runs; the bank provides the driver)
+  datasource:
+    url: ${JDMS_LEGACY_DB_URL:}
+    username: ${JDMS_LEGACY_DB_USERNAME:}
+    password: ${JDMS_LEGACY_DB_PASSWORD:}
+    hikari:
+      read-only: true
+      maximum-pool-size: 2
+
+jdms:
+  migration:
+    files-root: ${JDMS_LEGACY_FILES_ROOT:}
+    secret-file: ${JDMS_LEGACY_SECRET_FILE:}
+    report-dir: ${JDMS_MIGRATION_REPORT_DIR:reports}
+    core:
+      url: ${JDMS_CORE_URL:}
+      token-uri: ${JDMS_OIDC_TOKEN_URI:}
+      client-id: ${JDMS_MIGRATION_CLIENT_ID:}
+      client-secret: ${JDMS_MIGRATION_CLIENT_SECRET:}
+    mapping:
+      permissions:
+        V: [VIEW_METADATA, VIEW_CONTENT]
+        D: [DOWNLOAD]
+        E: [EDIT_METADATA]
+        X: [DELETE]
+      decisions:
+        SUBMIT: SUBMIT
+        SUBMITTED: SUBMIT
+        APPROVED: APPROVE
+        REJECTED: REJECT
+        RETURNED: RETURN
+
+logging:
+  structured:
+    format:
+      console: logstash

@@ -1,0 +1,23 @@
+# Restore target for the backup rehearsal (B-13): the data services of deploy/docker-compose.yml as a second project
+# (docker compose -p jdms-restore), on other ports, with their data under $JDMS_RESTORE_DIR (bind mounts).
+services:
+  postgres:
+    ports: !override
+      - "127.0.0.1:${JDMS_RESTORE_DB_PORT:-15432}:5432"
+  seaweedfs:
+    ports: !override
+      - "127.0.0.1:${JDMS_RESTORE_S3_PORT:-18333}:8333"
+  opensearch:
+    ports: !override
+      - "127.0.0.1:${JDMS_RESTORE_OPENSEARCH_PORT:-19200}:9200"
+
+volumes:
+  postgres-data:
+    driver: local
+    driver_opts: { type: none, o: bind, device: "${JDMS_RESTORE_DIR:?set JDMS_RESTORE_DIR}/postgres" }
+  seaweedfs-data:
+    driver: local
+    driver_opts: { type: none, o: bind, device: "${JDMS_RESTORE_DIR}/seaweedfs" }
+  opensearch-data:
+    driver: local
+    driver_opts: { type: none, o: bind, device: "${JDMS_RESTORE_DIR}/opensearch" }

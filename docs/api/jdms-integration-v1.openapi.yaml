@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: JDMS Next Integration API
+  version: 1.0.0
+  description: |
+    Document services for bank systems (FLEXCUBE, LOS, CRM): file a document with its business keys, find documents
+    by those keys or by the caller's own reference, read their content and preview, add versions and delete.
+
+    * **Callers are OAuth2 clients** (client credentials grant). People use the web application, never this API.
+      Permissions come from the client's roles; request fields naming a user or role (`user_id`, `role_id`) are
+      refused with 422 `FIELD_NOT_ALLOWED`.
+    * **Every write needs an `Idempotency-Key`**: repeating a request with the same key and the same content returns
+      the original response and stores nothing new (safe retries after timeouts); the same key with different
+      content is 409 `IDEMPOTENCY_KEY_REUSED`. Keys are kept for 24 hours.
+    * **Errors** are RFC 9457 `application/problem+json` with a stable `code`, the `requestId` and, for invalid
+      fields, `errors[]`.
+    * **Limits**: each client is rate-limited (429 `RATE_LIMITED` with `Retry-After`); files up to the cabinet's
+      limit (100 MB by default).
+    * Documents the client may not see are reported as 404, never 403, so their existence is not revealed.
+    * Every call is audited with the client's identity.
+
+    Guide: *JDMS Next FLEXCUBE Integration Guide* (docs/manuals). Design: ADR-0016, ADR-0024 (B-18 additions).
+servers:
+  - url: https://192.168.2.202:5180/integration/v1
+    description: JMR test server (through the web front end)
+  - url: https://{host}/integration/v1
+    description: A bank's JDMS Next
+    variables:
+      host:
+        default: dms.bank.example
+security:
+  - oauth2: []
+tags:
+  - name: Documents
+paths:
+  /documents:
+    post:
+      tags: [Documents]
+      operationId: uploadDocument
+      summary: File a document with its business keys
+      description: |
+        Multipart request: the `metadata` part (JSON) **must come before** the `file` part (the file is streamed,
+        not buffered). The document is created with version 1.0. If its type needs approval it is
+        `PENDING_APPROVAL` until a checker approves it in JDMS Next; otherwise `ACTIVE`. Antivirus, text extraction,
+        OCR and preview follow in the background.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [metadata, file]
+              properties:
+                metadata:
+                  $ref: '#/components/schemas/UploadMetadata'
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              metadata:
+                contentType: application/json
+      responses:
+        '201':
+          description: Filed (or the original response of a repeated request).
+          headers:
+            Location:
+              schema: {type: string}
+              description: /integration/v1/documents/{documentId}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '413': {$ref: '#/components/responses/TooLarge'}
+        '422': {$ref: '#/components/responses/Invalid'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/Unavailable'}
+    get:
+      tags: [Documents]
+      operationId: listDocuments
+      summary: Find documents by business keys or the caller's reference
+      description: At least one of `cif`, `accountNo`, `contractRef`, `applicationRef`, `externalRef` is required. Newest first.
+      parameters:
+        - {name: cif, in: query, schema: {type: string}}
+        - {name: accountNo, in: query, schema: {type: string}}
+        - {name: contractRef, in: query, schema: {type: string}}
+        - {name: applicationRef, in: query, schema: {type: string}}
+        - name: externalRef
+          in: query
+          description: The reference the calling system gave at upload (for example its customer-creation reference).
+          schema: {type: string}
+        - {name: documentTypeCode, in: query, schema: {type: string}}
+        - {name: page, in: query, schema: {type: integer, minimum: 0, default: 0}}
+        - {name: size, in: query, schema: {type: integer, minimum: 1, maximum: 200, default: 50}}
+      responses:
+        '200':
+          description: The documents the client may see.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentPage'
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '422': {$ref: '#/components/responses/Invalid'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+  /documents/{id}:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [Documents]
+      operationId: getDocument
+      summary: A document's metadata and current version
+      responses:
+        '200':
+          description: The document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+    delete:
+      tags: [Documents]
+      operationId: deleteDocument
+      summary: Move a document to the recycle bin
+      description: |
+        200 with the document when deleted at once; 202 with a pending change when the type requires approval of
+        deletions. Blocked (409) for documents on legal hold or declared records. Needs the delete permission.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKeyOptional'
+      responses:
+        '200':
+          description: Deleted (recoverable from the recycle bin).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '202':
+          description: Deletion proposed; a checker decides.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingChange'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+  /documents/{id}/content:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [Documents]
+      operationId: getContent
+      summary: Download the current version
+      description: The approved current version, or the only version while the first one awaits approval. SHA-256 is verified on read.
+      responses:
+        '200':
+          description: The file, as uploaded.
+          headers:
+            Content-Disposition:
+              schema: {type: string}
+          content:
+            application/octet-stream:
+              schema: {type: string, format: binary}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/Unavailable'}
+  /documents/{id}/preview:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [Documents]
+      operationId: getPreview
+      summary: A PDF (or image) preview of the current version, for display in the calling screen
+      description: Available once processing has finished; 409 `PREVIEW_UNAVAILABLE` before. Never for infected files (403 `DOCUMENT_QUARANTINED`).
+      responses:
+        '200':
+          description: The preview, served inline.
+          content:
+            application/pdf:
+              schema: {type: string, format: binary}
+            image/png:
+              schema: {type: string, format: binary}
+            image/jpeg:
+              schema: {type: string, format: binary}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+  /documents/{id}/versions:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    post:
+      tags: [Documents]
+      operationId: addVersion
+      summary: Add a new major version in one call
+      description: Multipart `comment` (optional) then `file`. Refused (409) while someone has the document checked out or a version awaits approval.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                comment:
+                  type: string
+                  maxLength: 1000
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: The new version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '413': {$ref: '#/components/responses/TooLarge'}
+        '422': {$ref: '#/components/responses/Invalid'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/Unavailable'}
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Keycloak client credentials. The client's service account carries the tenant, branch scope, clearance and roles (INTEGRATION_CLIENT).
+      flows:
+        clientCredentials:
+          tokenUrl: https://192.168.3.197:8443/realms/jdms-local/protocol/openid-connect/token
+          scopes: {}
+  parameters:
+    DocumentId:
+      name: id
+      in: path
+      required: true
+      description: The document's reference number (documentId returned by the upload).
+      schema: {type: string, format: uuid}
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: A unique value per logical request (for example the calling system's transaction ID); reuse it when retrying.
+      schema: {type: string, maxLength: 100}
+    IdempotencyKeyOptional:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema: {type: string, maxLength: 100}
+  responses:
+    BadRequest:
+      description: Malformed request (`METADATA_INVALID`, `MULTIPART_INVALID`, `IDEMPOTENCY_KEY_REQUIRED`).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    Unauthorized:
+      description: Missing, expired or invalid token.
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    Forbidden:
+      description: Not allowed (`ACCESS_DENIED`, a person calling, `DOCUMENT_QUARANTINED`).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    NotFound:
+      description: Unknown, or not visible to this client (`DOCUMENT_NOT_FOUND`).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    Conflict:
+      description: State conflict (`IDEMPOTENCY_KEY_REUSED`, `APPROVAL_ROUTING_FAILED`, `COMMITTEE_QUORUM_UNREACHABLE`, `DOCUMENT_CHECKED_OUT`, `PREVIEW_UNAVAILABLE`, `CONTENT_UNAVAILABLE`, legal hold).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    TooLarge:
+      description: File above the cabinet's limit (`FILE_TOO_LARGE`) or quota reached (`QUOTA_EXCEEDED`).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    Invalid:
+      description: Invalid fields, listed in `errors[]` (`FIELD_REQUIRED`, `DOCUMENT_TYPE_UNKNOWN`, `BRANCH_UNKNOWN`, `FOLDER_INVALID`, `EXTERNAL_SYSTEM_INVALID`, `CUSTOMER_MISMATCH`, `FIELD_NOT_ALLOWED`, `BUSINESS_KEY_REQUIRED`, `FILE_REQUIRED`, `FILE_EMPTY`, ...).
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    RateLimited:
+      description: Too many requests from this client (`RATE_LIMITED`); wait for `Retry-After` seconds.
+      headers:
+        Retry-After: {schema: {type: integer}}
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+    Unavailable:
+      description: File storage temporarily unavailable (`STORAGE_UNAVAILABLE`); nothing was stored. Retry with the same Idempotency-Key.
+      headers:
+        Retry-After: {schema: {type: integer}}
+      content: {application/problem+json: {schema: {$ref: '#/components/schemas/Problem'}}}
+  schemas:
+    UploadMetadata:
+      type: object
+      required: [externalSystem, documentTypeCode, branchCode]
+      properties:
+        externalSystem:
+          type: string
+          pattern: '^[A-Za-z0-9_.-]{1,30}$'
+          example: FCUBS
+          description: The calling system, recorded as the document's source.
+        documentTypeCode: {type: string, example: ACCOUNT_OPENING_FORM}
+        cabinetCode: {type: string, description: Optional check that the type belongs to this cabinet., example: CUSTOMERS}
+        title: {type: string, maxLength: 500, description: 'Default: the type code and the main business key.'}
+        classification: {type: string, enum: [PUBLIC, INTERNAL, CONFIDENTIAL, RESTRICTED], description: 'Default and minimum: the type''s.'}
+        branchCode: {type: string, example: '001'}
+        folderPath:
+          type: string
+          example: /Customer onboarding/KYC
+          description: The folder to file into, by folder names as staff see them in the type's cabinet. 422 FOLDER_INVALID when it does not exist.
+        folderId: {type: string, format: uuid, description: The folder by its ID (alternative to folderPath).}
+        cif: {type: string, maxLength: 50, example: C25112594}
+        customerNo: {type: string, description: Accepted as the CIF (legacy name); must equal cif when both are sent.}
+        customerName: {type: string, maxLength: 200}
+        accountNo: {type: string, maxLength: 50}
+        collateralCode: {type: string, maxLength: 50}
+        contractRef: {type: string, maxLength: 50}
+        transactionRef: {type: string, maxLength: 50}
+        applicationRef: {type: string, maxLength: 50}
+        externalRef:
+          type: string
+          maxLength: 100
+          example: STDCIF-001-2026-0042
+          description: The calling system's own reference; documents can be found by it later.
+        issueDate: {type: string, format: date, description: Kept in the type's issue_date field when it has one.}
+        expiryDate: {type: string, format: date}
+        customFields:
+          type: object
+          additionalProperties: true
+          description: The document type's own fields by key (numbers as strings or numbers, dates as yyyy-MM-dd, list values by code).
+    UploadResponse:
+      type: object
+      properties:
+        documentId: {type: string, format: uuid, description: The DMS reference number to store in the calling system.}
+        versionId: {type: string, format: uuid}
+        status: {type: string, enum: [ACTIVE, PENDING_APPROVAL]}
+        warnings:
+          type: array
+          items:
+            type: object
+            properties:
+              code: {type: string, example: DUPLICATE_CONTENT}
+              message: {type: string}
+              count: {type: integer}
+    Document:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        cabinetCode: {type: string}
+        documentTypeCode: {type: string}
+        folderId: {type: string, format: uuid, nullable: true}
+        title: {type: string}
+        status: {type: string, enum: [DRAFT, PENDING_APPROVAL, ACTIVE, REJECTED, DELETED, DISPOSED]}
+        classification: {type: string, enum: [PUBLIC, INTERNAL, CONFIDENTIAL, RESTRICTED]}
+        branchCode: {type: string}
+        cif: {type: string, nullable: true}
+        customerName: {type: string, nullable: true}
+        accountNo: {type: string, nullable: true}
+        collateralCode: {type: string, nullable: true}
+        contractRef: {type: string, nullable: true}
+        transactionRef: {type: string, nullable: true}
+        applicationRef: {type: string, nullable: true}
+        expiryDate: {type: string, format: date, nullable: true}
+        physicalLocation: {type: string, nullable: true}
+        physicalRef: {type: string, nullable: true}
+        customFields: {type: object, additionalProperties: true, description: Sensitive fields are masked.}
+        currentVersion: {$ref: '#/components/schemas/Version'}
+        checkedOutBy: {type: string, format: uuid, nullable: true}
+        checkedOutAt: {type: string, format: date-time, nullable: true}
+        sourceSystem: {type: string, example: 'INTEGRATION:fcubs:FCUBS'}
+        externalRef: {type: string, nullable: true}
+        onLegalHold: {type: boolean}
+        createdAt: {type: string, format: date-time}
+        createdBy: {type: string}
+        updatedAt: {type: string, format: date-time}
+        version: {type: integer, format: int64}
+    Version:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        number: {type: string, example: '1.0'}
+        approvalStatus: {type: string, enum: [DRAFT, PENDING, APPROVED, REJECTED]}
+        sizeBytes: {type: integer, format: int64}
+        mimeType: {type: string}
+        detectedMimeType: {type: string, nullable: true}
+        pageCount: {type: integer, nullable: true}
+        originalFilename: {type: string}
+        sha256: {type: string}
+        storageStatus: {type: string, enum: [STORED, MISSING, QUARANTINED, DESTROYED]}
+        processingStatus: {type: string, enum: [PENDING, PROCESSING, DONE, FAILED, QUARANTINED]}
+        indexStatus: {type: string, enum: [PENDING, INDEXED, FAILED]}
+        comment: {type: string, nullable: true}
+        createdAt: {type: string, format: date-time}
+        createdBy: {type: string}
+    DocumentPage:
+      type: object
+      properties:
+        items:
+          type: array
+          items: {$ref: '#/components/schemas/Document'}
+        page: {type: integer}
+        size: {type: integer}
+        total: {type: integer, format: int64, description: Counts only documents the client may see.}
+    PendingChange:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        subjectType: {type: string}
+        operation: {type: string}
+        summary: {type: string}
+        status: {type: string}
+    Problem:
+      type: object
+      properties:
+        type: {type: string}
+        title: {type: string}
+        status: {type: integer}
+        detail: {type: string}
+        code: {type: string, description: Stable error code to program against.}
+        requestId: {type: string, description: Quote it to support; it is in the audit trail.}
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field: {type: string}
+              code: {type: string}
+              message: {type: string}

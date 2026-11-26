@@ -1,0 +1,22 @@
+# Local development against deploy/docker-compose.yml. The password is read from the environment
+# (see .env.example); nothing secret is stored here.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${JDMS_DB_PORT:5432}/${JDMS_DB_NAME:jdms}
+    username: ${JDMS_DB_USERNAME:jdms_app}
+    password: ${JDMS_DB_PASSWORD}
+  flyway:
+    user: ${JDMS_DB_OWNER_USERNAME:jdms}
+    password: ${JDMS_DB_OWNER_PASSWORD}
+    # Adds the local seed (tenants BANK1 and BANK2, branches) used with the deploy/keycloak dev users
+    locations: classpath:db/migration/{vendor},classpath:db/seed/{vendor}/local
+
+jdms:
+  security:
+    issuer-uri: ${KEYCLOAK_PUBLIC_URL:http://localhost:${KEYCLOAK_PORT:8180}}/realms/jdms-local
+  search:
+    url: http://localhost:${OPENSEARCH_PORT:9200}
+  storage:
+    endpoint: http://localhost:${S3_PORT:8333}
+    bucket: jdms-local
+    create-bucket: true

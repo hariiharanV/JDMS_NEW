@@ -1,0 +1,5 @@
+# OCR benchmark only (B-13, ADR-0021); never part of a shipped image. PaddlePaddle and PaddleOCR: Apache-2.0.
+paddlepaddle==3.3.1
+paddleocr==3.7.0
+rapidfuzz==3.14.6
+pillow==12.3.0

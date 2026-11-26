@@ -1,0 +1,17 @@
+# Local development against deploy/docker-compose.yml (same database, bucket and KMS key as the core's local
+# profile). Secrets come from the environment (see deploy/.env.example).
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${JDMS_DB_PORT:5432}/${JDMS_DB_NAME:jdms}
+    username: ${JDMS_DB_USERNAME:jdms_app}
+    password: ${JDMS_DB_PASSWORD}
+
+jdms:
+  storage:
+    endpoint: http://localhost:${S3_PORT:8333}
+    bucket: jdms-local
+  worker:
+    tika:
+      url: http://localhost:${TIKA_PORT:9998}
+    gotenberg:
+      url: http://localhost:${GOTENBERG_PORT:3300}

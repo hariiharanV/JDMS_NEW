@@ -1,0 +1,2538 @@
+/*
+ * JDMS Next (UI handoff §2): one navy frame, deep action blue, gold only for "you are here" (wordmark, active tab,
+ * focus ring), dark status inks on tinted grounds. Logical properties only (inline/block, start/end) so everything
+ * mirrors in Arabic. Colours match src/theme.ts.
+ */
+:root {
+  --jdms-navy: #13294b;
+  --jdms-navy-700: #22395f;
+  --jdms-navy-line: #3a5078;
+  --jdms-on-navy-muted: #c6d0df;
+  --jdms-gold: #e0b456;
+  --jdms-gold-accent: #c79a3b;
+  --jdms-action: #1d4e89;
+  --jdms-ink: #1b2230;
+  --jdms-ink-2: #4a5363;
+  --jdms-ink-3: #5b6472;
+  --jdms-ground: #f6f7f9;
+  --jdms-surface: #fff;
+  --jdms-sunken: #eef0f3;
+  --jdms-footer: #fafbfc;
+  --jdms-selected: #e8eef7;
+  --jdms-border: #dce0e6;
+  --jdms-border-strong: #c9d2de;
+  --jdms-divider: #e8ebef;
+  --jdms-row: #f0f2f5;
+  --jdms-success-fg: #1f6b3a;
+  --jdms-success-bg: #e6f4ea;
+  --jdms-success-border: #b9d3bf;
+  --jdms-warning-fg: #7a4f00;
+  --jdms-warning-dot: #b07400;
+  --jdms-warning-bg: #fdf1d8;
+  --jdms-warning-border: #e3c27a;
+  --jdms-neutral-fg: #3f4754;
+  --jdms-neutral-bg: #eef0f3;
+  --jdms-danger-fg: #9a2626;
+  --jdms-danger-bg: #fbe7e7;
+  --jdms-danger-border: #e6b7b7;
+  --jdms-mark: #fbe6b5;
+  --jdms-font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  line-height: 1.5;
+  background: var(--jdms-ground);
+  color: var(--jdms-ink);
+  font-variant-numeric: tabular-nums;
+  accent-color: var(--jdms-action);
+  caret-color: var(--jdms-action);
+  scrollbar-color: #b7c3d1 transparent;
+}
+
+html[lang="ar"] body {
+  font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--jdms-mark);
+  color: var(--jdms-ink);
+}
+
+a {
+  text-underline-offset: 0.18em;
+}
+
+/* one focus ring everywhere, antd components included (their own glow is off in theme.ts) */
+:focus-visible {
+  outline: 2px solid var(--jdms-gold-accent) !important;
+  outline-offset: 1px !important;
+}
+
+/* text fields show the ring on their frame, not on the bare input inside it */
+.ant-input-affix-wrapper input:focus-visible,
+.ant-input-number input:focus-visible,
+.ant-select input:focus-visible,
+.ant-picker input:focus-visible {
+  outline: none !important;
+}
+
+.ant-input-affix-wrapper:focus-within,
+.ant-input-number-focused,
+.ant-select-focused,
+.ant-picker-focused {
+  outline: 2px solid var(--jdms-gold-accent);
+  outline-offset: 1px;
+}
+
+[dir="rtl"] .jdms-flip-rtl {
+  transform: scaleX(-1);
+}
+
+.jdms-code {
+  font-family: var(--jdms-font-mono);
+  font-size: 12px;
+  color: var(--jdms-ink-3);
+}
+
+.jdms-code-full {
+  word-break: break-all;
+}
+
+/* ---- shell ---- */
+
+.jdms-shell {
+  min-block-size: 100vh;
+  overflow-x: clip;
+}
+
+.jdms-skip-link {
+  position: absolute;
+  inset-inline-start: 16px;
+  inset-block-start: -60px;
+  z-index: 1000;
+  padding: 10px 14px;
+  background: var(--jdms-surface);
+  color: var(--jdms-navy);
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.jdms-skip-link:focus {
+  inset-block-start: 12px;
+}
+
+.jdms-header.ant-layout-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 24px;
+  block-size: auto;
+  min-block-size: 64px;
+  padding-block: 10px;
+  padding-inline: 24px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.jdms-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.jdms-wordmark {
+  direction: ltr; /* the product name reads left to right in both languages */
+  unicode-bidi: isolate;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.jdms-wordmark b {
+  color: var(--jdms-gold);
+  font-weight: 600;
+}
+
+.jdms-header-bank {
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid var(--jdms-navy-line);
+  color: var(--jdms-on-navy-muted);
+  font-size: 13px;
+}
+
+.jdms-global-search {
+  flex: 1 1 320px;
+  max-inline-size: 560px;
+}
+
+.jdms-global-search .ant-input-affix-wrapper {
+  border-color: transparent;
+}
+
+.jdms-global-search .ant-input-prefix {
+  margin-inline-end: 8px;
+  color: var(--jdms-ink-3);
+}
+
+.jdms-global-search input::placeholder {
+  color: var(--jdms-ink-3);
+}
+
+.jdms-kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--jdms-border);
+  border-radius: 4px;
+  color: var(--jdms-ink-3);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.jdms-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-inline-start: auto;
+}
+
+.jdms-header .ant-btn.jdms-header-icon {
+  inline-size: 44px;
+  block-size: 44px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.jdms-header .ant-btn.jdms-header-icon .ant-badge {
+  color: inherit;
+  font-size: inherit;
+}
+
+.jdms-header .ant-btn.jdms-header-icon:hover,
+.jdms-header .ant-btn.jdms-user:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 10%);
+}
+
+.jdms-header .ant-btn.jdms-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  block-size: auto;
+  min-block-size: 44px;
+  padding: 4px 8px;
+  color: #fff;
+  font-weight: 400;
+  text-align: start;
+}
+
+.jdms-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 50%;
+  background: var(--jdms-gold);
+  color: var(--jdms-navy);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.jdms-user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.jdms-user-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.jdms-user-line {
+  color: var(--jdms-on-navy-muted);
+  font-size: 12px;
+}
+
+.jdms-user-caret {
+  color: var(--jdms-on-navy-muted);
+  font-size: 10px;
+}
+
+.jdms-body {
+  position: relative;
+}
+
+.jdms-sider.ant-layout-sider {
+  border-inline-end: 1px solid var(--jdms-border);
+}
+
+/* the folded menu on a phone opens over the page */
+.jdms-sider.jdms-sider-overlay.ant-layout-sider {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 20;
+  box-shadow: 0 4px 16px rgb(20 30 50 / 12%);
+}
+
+.jdms-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  min-block-size: 100%;
+  padding-block: 20px;
+  padding-inline: 12px;
+}
+
+.jdms-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-nav-group-title {
+  padding-block: 0 6px;
+  padding-inline: 12px;
+  color: var(--jdms-ink-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+html[lang="ar"] .jdms-nav-group-title {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.jdms-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-block-size: 40px;
+  box-sizing: border-box;
+  padding-block: 10px;
+  padding-inline: 12px;
+  border-radius: 8px;
+  color: var(--jdms-ink);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.jdms-nav-item .anticon {
+  font-size: 18px;
+}
+
+.jdms-nav-item:hover {
+  color: var(--jdms-navy);
+  background: var(--jdms-row);
+}
+
+.jdms-nav-item.jdms-nav-active {
+  color: var(--jdms-navy);
+  background: var(--jdms-selected);
+  font-weight: 600;
+}
+
+.jdms-nav-badge {
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--jdms-navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.jdms-nav-note {
+  margin-block: auto 0;
+  padding-inline: 12px;
+  color: var(--jdms-ink-3);
+  font-size: 12px;
+}
+
+.jdms-content.ant-layout-content {
+  min-inline-size: 0;
+  padding-block: 32px 40px;
+  padding-inline: 32px;
+}
+
+.jdms-content:focus {
+  outline: none !important;
+}
+
+/* ---- page header ---- */
+
+.jdms-page-header {
+  margin-block-end: 24px;
+}
+
+.jdms-page-breadcrumb {
+  margin-block-end: 8px;
+}
+
+.jdms-page-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.jdms-page-heading {
+  min-inline-size: 0;
+}
+
+.jdms-page-heading h1.ant-typography {
+  margin: 0;
+  color: var(--jdms-navy);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.jdms-page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-block-start: 10px;
+}
+
+.jdms-page-description {
+  margin-block: 6px 0;
+  color: var(--jdms-ink-2);
+  font-size: 14px;
+}
+
+.jdms-page-alert {
+  margin-block-end: 16px;
+}
+
+/* ---- status chips and classification ---- */
+
+.jdms-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.jdms-chip-neutral { color: var(--jdms-neutral-fg); background: var(--jdms-neutral-bg); }
+.jdms-chip-success { color: var(--jdms-success-fg); background: var(--jdms-success-bg); }
+.jdms-chip-warning { color: var(--jdms-warning-fg); background: var(--jdms-warning-bg); }
+.jdms-chip-danger { color: var(--jdms-danger-fg); background: var(--jdms-danger-bg); }
+
+.jdms-chip-marker {
+  flex: none;
+  box-sizing: border-box;
+  inline-size: 6px;
+  block-size: 6px;
+  background: currentColor;
+}
+
+.jdms-chip-warning .jdms-chip-marker { background: var(--jdms-warning-dot); }
+.jdms-marker-dot { border-radius: 50%; }
+.jdms-marker-ring { border: 1.5px solid currentColor; border-radius: 50%; background: transparent !important; }
+.jdms-marker-square { border-radius: 1px; }
+.jdms-marker-hollow-square { border: 1.5px solid currentColor; border-radius: 1px; background: transparent !important; }
+.jdms-marker-bar { inline-size: 8px; block-size: 2px; }
+
+/* classification: the higher the level, the heavier the label */
+.jdms-classification {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--jdms-ink-2);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.jdms-classification-INTERNAL { font-weight: 500; }
+
+.jdms-classification-CONFIDENTIAL,
+.jdms-classification-RESTRICTED {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.jdms-classification-CONFIDENTIAL { color: var(--jdms-ink); background: var(--jdms-sunken); }
+.jdms-classification-RESTRICTED { color: #fff; background: var(--jdms-navy); }
+
+/* ---- empty states, inline confirmation, notifications ---- */
+
+.jdms-empty .jdms-empty-icon {
+  color: var(--jdms-ink-3);
+  font-size: 40px;
+}
+
+.jdms-empty.ant-empty .ant-empty-image {
+  block-size: auto;
+}
+
+.jdms-empty-title {
+  display: block;
+  color: var(--jdms-ink);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.jdms-empty-text {
+  display: block;
+  max-inline-size: 48ch;
+  margin-block-start: 4px;
+  margin-inline: auto;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-inline-confirm {
+  margin-block: 12px;
+}
+
+.jdms-notifications {
+  inline-size: min(360px, 86vw);
+}
+
+.jdms-notifications-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block-end: 8px;
+}
+
+.jdms-notifications ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-notification {
+  display: flex;
+  gap: 10px;
+  inline-size: 100%;
+  padding-block: 10px;
+  padding-inline: 4px;
+  border: 0;
+  border-block-start: 1px solid var(--jdms-divider);
+  background: transparent;
+  color: var(--jdms-ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.jdms-notification:hover {
+  background: var(--jdms-ground);
+}
+
+.jdms-notification .anticon {
+  margin-block-start: 3px;
+  color: var(--jdms-warning-dot);
+}
+
+.jdms-notification.jdms-unread {
+  font-weight: 600;
+}
+
+.jdms-notification time {
+  display: block;
+  color: var(--jdms-ink-3);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.jdms-notifications-empty {
+  margin: 0;
+  color: var(--jdms-ink-2);
+}
+
+/* ---- sign-in ---- */
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100vh;
+}
+
+.login {
+  display: grid;
+  grid-template-columns: minmax(280px, 5fr) 7fr;
+  min-block-size: 100vh;
+  background: var(--jdms-surface);
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 48px;
+  background: var(--jdms-navy);
+  color: #fff;
+}
+
+/* the product name stays left to right; as a block it sits at the inline start, like the claim below it */
+.login-mark,
+.login-mark-rest {
+  align-self: flex-start;
+  direction: ltr;
+}
+
+.login-mark {
+  color: var(--jdms-gold);
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.login-mark-rest {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.login-claim {
+  max-inline-size: 34ch;
+  margin-block: 28px 0;
+  color: var(--jdms-on-navy-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.login-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 48px;
+}
+
+.login-language {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-form {
+  max-inline-size: 420px;
+  margin-block: auto;
+}
+
+.login-form h1.ant-typography {
+  color: var(--jdms-navy);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.login-note {
+  margin-block-start: 20px;
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+
+  .login-brand {
+    padding: 28px;
+  }
+
+  .login-mark {
+    font-size: 48px;
+  }
+
+  .login-panel {
+    padding: 24px;
+  }
+}
+
+/* ---- lists, meta and shared pieces ---- */
+
+.row-selected > td {
+  background: var(--jdms-selected);
+}
+
+.meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  color: var(--jdms-ink-2);
+}
+
+.full-width {
+  inline-size: 100%;
+}
+
+.filter-select {
+  min-inline-size: 200px;
+}
+
+.thumbnail {
+  display: block;
+  max-inline-size: 100%;
+  border: 1px solid var(--jdms-border);
+  border-radius: 8px;
+}
+
+/* ---- inline panels (forms that open in place instead of a dialog) ---- */
+
+.inline-panel {
+  max-inline-size: 960px;
+  margin-block: 8px 20px;
+  padding: 20px 24px;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+}
+
+.inline-panel h4.ant-typography,
+.inline-panel h2.jdms-panel-title {
+  margin-block: 0 16px;
+}
+
+.inline-panel h2.jdms-panel-title {
+  font-size: 18px;
+}
+
+.panel-actions {
+  margin-block-start: 8px;
+}
+
+/* ---- search ---- */
+
+.snippet {
+  max-inline-size: 80ch;
+  margin-block: 6px 0;
+  color: var(--jdms-ink);
+}
+
+.snippet mark {
+  padding: 0 1px;
+  background: var(--jdms-mark);
+  color: inherit;
+}
+
+/* ---- tasks, audit, admin ---- */
+
+.violations {
+  margin: 0;
+  padding-inline-start: 20px;
+}
+
+.field-row {
+  border-block-end: 1px dashed var(--jdms-border);
+  margin-block-end: 8px;
+}
+
+/* ---- shared pieces of the daily screens (phase 2) ---- */
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.jdms-panel {
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+}
+
+.jdms-table-card.ant-card > .ant-card-body {
+  padding: 0;
+}
+
+.jdms-muted {
+  color: var(--jdms-ink-2);
+}
+
+.jdms-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-block-size: 44px;
+  font-size: 14px;
+}
+
+/* stat cards: a count that opens the list behind it */
+.jdms-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-block-end: 24px;
+}
+
+.jdms-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+  color: var(--jdms-ink);
+  text-decoration: none;
+}
+
+.jdms-stat:hover {
+  border-color: var(--jdms-border-strong);
+  box-shadow: 0 1px 3px rgb(20 30 50 / 8%);
+  color: var(--jdms-ink);
+}
+
+.jdms-stat-label {
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-stat-value {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--jdms-navy);
+}
+
+.jdms-stat-hint {
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-stat-warning {
+  border-color: var(--jdms-warning-border);
+}
+
+.jdms-stat-warning .jdms-stat-hint {
+  color: var(--jdms-warning-fg);
+  font-weight: 600;
+}
+
+/* facts: labelled values in two columns */
+.jdms-facts {
+  display: flex;
+  flex-direction: column;
+}
+
+.jdms-facts-section + .jdms-facts-section {
+  margin-block-start: 16px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+.jdms-facts-title {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--jdms-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[lang="ar"] .jdms-facts-title {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.jdms-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+  margin: 0;
+}
+
+.jdms-fact dt {
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-fact dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* approval timeline */
+.jdms-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-timeline-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.jdms-timeline-dot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+.jdms-timeline-submitted { background: var(--jdms-selected); color: var(--jdms-action); }
+.jdms-timeline-approved { background: var(--jdms-success-bg); color: var(--jdms-success-fg); }
+.jdms-timeline-rejected { background: var(--jdms-danger-bg); color: var(--jdms-danger-fg); }
+.jdms-timeline-returned { background: var(--jdms-warning-bg); color: var(--jdms-warning-fg); }
+
+.jdms-timeline-body {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.jdms-timeline-body strong {
+  font-weight: 600;
+}
+
+.jdms-timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-timeline-comment {
+  display: block;
+  margin-block-start: 6px;
+  padding: 8px 12px;
+  background: var(--jdms-footer);
+  border-inline-start: 3px solid var(--jdms-border-strong);
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+
+/* document viewer: header bar over a sunken well with the page */
+.jdms-viewer {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-inline-size: 0;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+}
+
+.jdms-viewer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 10px 16px;
+  border-block-end: 1px solid var(--jdms-divider);
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-viewer-name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.jdms-viewer-name > * + *::before {
+  content: "· ";
+}
+
+.jdms-viewer-tools {
+  display: flex;
+  gap: 4px;
+}
+
+.jdms-viewer-well {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-block-size: 320px;
+  padding: 24px;
+  overflow: auto;
+  background: var(--jdms-sunken);
+}
+
+.jdms-viewer-well:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+.jdms-viewer-compact .jdms-viewer-well {
+  padding: 16px;
+}
+
+.jdms-viewer-page {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  line-height: 0;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(20 30 50 / 12%);
+}
+
+.jdms-viewer-page canvas {
+  display: block;
+}
+
+.jdms-viewer-skeleton.ant-skeleton-element .ant-skeleton-image {
+  inline-size: min(440px, 70vw);
+  block-size: min(560px, 90vw);
+}
+
+.jdms-viewer-caption {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--jdms-ink-3);
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+/* the watermark repeats across the whole page, diagonally, under the reader's eye but never in the way */
+.jdms-watermark {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.jdms-watermark-tile {
+  position: absolute;
+  inset: -50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transform: rotate(-30deg);
+}
+
+.jdms-watermark-tile span {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: pre;
+  color: rgb(19 41 75 / 12%);
+}
+
+/* ---- home ---- */
+
+.jdms-home-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.jdms-home-tasks {
+  flex: 1 1 360px;
+  min-inline-size: 0;
+}
+
+.jdms-home-recent {
+  flex: 2 1 520px;
+  min-inline-size: 0;
+}
+
+.jdms-home-card.ant-card > .ant-card-body {
+  padding: 0;
+}
+
+h2.jdms-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--jdms-ink);
+}
+
+.jdms-card-alert {
+  margin: 16px 20px;
+}
+
+.jdms-card-pad {
+  padding: 20px;
+}
+
+.jdms-action-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-action-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+}
+
+.jdms-action-list li + li {
+  border-block-start: 1px solid var(--jdms-row);
+}
+
+.jdms-action-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.jdms-action-title {
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.jdms-action-meta {
+  margin-block-start: 2px;
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-title-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.jdms-title-cell a {
+  font-weight: 500;
+}
+
+.jdms-title-sub {
+  font-size: 12px;
+  color: var(--jdms-ink-3);
+}
+
+.jdms-home-card .ant-table-wrapper .ant-table-thead > tr > th:first-child,
+.jdms-home-card .ant-table-wrapper .ant-table-tbody > tr > td:first-child {
+  padding-inline-start: 20px;
+}
+
+.jdms-home-card .ant-table-wrapper .ant-table-thead > tr > th:last-child,
+.jdms-home-card .ant-table-wrapper .ant-table-tbody > tr > td:last-child {
+  padding-inline-end: 20px;
+}
+
+/* ---- tasks: list beside the selected task ---- */
+
+.jdms-pill-filter.ant-segmented {
+  padding: 0;
+  background: transparent;
+}
+
+.jdms-pill-filter .ant-segmented-group {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.jdms-pill-filter .ant-segmented-item {
+  min-block-size: 36px;
+  border: 1px solid var(--jdms-border-strong);
+  border-radius: 999px;
+  background: var(--jdms-surface);
+  color: var(--jdms-ink);
+}
+
+.jdms-pill-filter .ant-segmented-item-label {
+  display: flex;
+  align-items: center;
+  min-block-size: 34px;
+  padding-inline: 14px;
+  font-size: 13px;
+}
+
+.jdms-pill-filter .ant-segmented-item-selected {
+  border-color: var(--jdms-navy);
+  background: var(--jdms-navy);
+  color: #fff;
+  font-weight: 600;
+}
+
+.jdms-pill-filter .ant-segmented-thumb {
+  display: none;
+}
+
+.jdms-split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.jdms-task-list-card {
+  flex: 1 1 320px;
+  max-inline-size: 420px;
+  min-inline-size: 0;
+  overflow: hidden;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+}
+
+.jdms-task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-task-list li + li {
+  border-block-start: 1px solid var(--jdms-row);
+}
+
+a.jdms-task-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  color: var(--jdms-ink);
+  text-decoration: none;
+}
+
+a.jdms-task-link:hover {
+  background: var(--jdms-footer);
+  color: var(--jdms-ink);
+}
+
+a.jdms-task-link[aria-current="true"] {
+  background: var(--jdms-selected);
+  box-shadow: inset 3px 0 0 var(--jdms-action);
+}
+
+[dir="rtl"] a.jdms-task-link[aria-current="true"] {
+  box-shadow: inset -3px 0 0 var(--jdms-action);
+}
+
+.jdms-task-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-task-title {
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+a.jdms-task-link[aria-current="true"] .jdms-task-title {
+  color: var(--jdms-navy);
+}
+
+.jdms-task-meta {
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-task-more {
+  padding: 12px 16px;
+  border-block-start: 1px solid var(--jdms-row);
+}
+
+.jdms-sla-on-time {
+  font-size: 12px;
+  color: var(--jdms-success-fg);
+}
+
+.jdms-task-detail {
+  display: flex;
+  flex: 2 1 520px;
+  flex-direction: column;
+  min-inline-size: 0;
+  background: var(--jdms-surface);
+  border: 1px solid var(--jdms-border);
+  border-radius: 10px;
+}
+
+.jdms-task-detail > .ant-skeleton,
+.jdms-task-detail > .ant-alert {
+  margin: 24px;
+}
+
+.jdms-task-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 24px;
+  border-block-end: 1px solid var(--jdms-divider);
+}
+
+.jdms-task-caption-line,
+.jdms-task-submitted {
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+h2.jdms-task-heading {
+  margin: 4px 0 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--jdms-navy);
+  overflow-wrap: anywhere;
+}
+
+.jdms-task-submitted {
+  margin-block-start: 6px;
+}
+
+.jdms-task-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-block-size: 44px;
+  font-size: 14px;
+}
+
+.jdms-task-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px;
+}
+
+.jdms-task-preview,
+.jdms-task-facts {
+  display: flex;
+  flex: 1 1 260px;
+  flex-direction: column;
+  gap: 16px;
+  min-inline-size: 0;
+}
+
+.jdms-task-facts h3.jdms-facts-title {
+  font-size: 12px;
+}
+
+/* the decision stays in reach while the evidence scrolls */
+.jdms-task-footer {
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-block-start: auto;
+  padding: 16px 24px;
+  background: var(--jdms-footer);
+  border-block-start: 1px solid var(--jdms-divider);
+  border-radius: 0 0 10px 10px;
+}
+
+.jdms-decision-bar .ant-form-item {
+  margin-block-end: 12px;
+}
+
+.jdms-decision-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.jdms-decision-hint {
+  margin-inline-start: auto;
+  font-size: 12px;
+  color: var(--jdms-ink-3);
+}
+
+/* ---- document page ---- */
+
+.jdms-overview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.jdms-overview-preview {
+  flex: 3 1 420px;
+  min-inline-size: 0;
+}
+
+.jdms-overview-facts {
+  display: flex;
+  flex: 2 1 320px;
+  flex-direction: column;
+  gap: 16px;
+  min-inline-size: 0;
+}
+
+.jdms-overview-preview > .jdms-panel {
+  padding: 32px 16px;
+}
+
+/* ---- search ---- */
+
+.jdms-search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block-end: 20px;
+}
+
+.jdms-search-input {
+  flex: 1 1 360px;
+  max-inline-size: 640px;
+}
+
+.jdms-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.jdms-refine {
+  flex: 1 1 240px;
+  max-inline-size: 280px;
+}
+
+.jdms-results {
+  display: flex;
+  flex: 999 1 480px;
+  flex-direction: column;
+  gap: 12px;
+  min-inline-size: 0;
+}
+
+.jdms-facet {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-block-end: 20px;
+}
+
+.jdms-facet + .jdms-facet {
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+.jdms-facet-title {
+  margin-block-end: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--jdms-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[lang="ar"] .jdms-facet-title {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.jdms-facet .ant-checkbox-wrapper {
+  inline-size: 100%;
+}
+
+.jdms-facet .ant-checkbox-label {
+  flex: 1;
+}
+
+.jdms-facet-value {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.jdms-facet-count {
+  font-size: 12px;
+  color: var(--jdms-ink-3);
+}
+
+.jdms-results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  min-block-size: 32px;
+  font-size: 13px;
+}
+
+.jdms-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.jdms-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-block: 2px;
+  padding-inline: 12px 4px;
+  background: var(--jdms-selected);
+  border: 1px solid #c4d3e8;
+  border-radius: 999px;
+  color: var(--jdms-navy);
+  font-weight: 500;
+}
+
+.jdms-pill button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 24px;
+  block-size: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.jdms-pill button:hover {
+  background: rgb(19 41 75 / 10%);
+}
+
+.jdms-hits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-hit + .jdms-hit {
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+.jdms-hit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+.jdms-hit-thumb {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 48px;
+  block-size: 64px;
+  background: var(--jdms-sunken);
+  border: 1px solid var(--jdms-border);
+  border-radius: 4px;
+  color: var(--jdms-ink-3);
+  font-size: 20px;
+}
+
+.jdms-hit-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-inline-size: 0;
+}
+
+.jdms-hit-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.jdms-hit-title > a {
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.jdms-hit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-hit-meta > div {
+  display: flex;
+  gap: 6px;
+}
+
+.jdms-hit-meta dd {
+  margin: 0;
+  font-weight: 500;
+  color: var(--jdms-ink);
+}
+
+.jdms-hit-meta > div:first-child dd {
+  font-weight: 400;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-hit-preview {
+  padding: 0 20px 20px;
+}
+
+.jdms-pagination {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 8px;
+}
+
+/* ---- browse: folders, documents, properties ---- */
+
+.jdms-browse {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr) minmax(260px, 320px);
+  gap: 16px;
+  align-items: start;
+}
+
+.jdms-pane-label {
+  display: block;
+  margin-block-end: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--jdms-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[lang="ar"] .jdms-pane-label {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.jdms-folder-tree {
+  margin-block-start: 12px;
+}
+
+.jdms-folder-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: var(--jdms-selected);
+  color: var(--jdms-navy);
+  font-weight: 600;
+}
+
+.jdms-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  border-block-end: 1px solid var(--jdms-divider);
+}
+
+.jdms-toolbar > .ant-input-affix-wrapper {
+  flex: 1 1 160px;
+}
+
+.jdms-toolbar > .ant-select {
+  flex: 1 1 130px;
+  min-inline-size: 120px;
+}
+
+.jdms-browse-list .ant-pagination {
+  padding-inline: 16px;
+}
+
+.jdms-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jdms-properties-thumb:empty {
+  display: none;
+}
+
+h2.jdms-properties-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.jdms-properties-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.jdms-grow {
+  flex: 1;
+}
+
+/* on a phone the results come first and Refine follows at full width */
+@media (max-width: 760px) {
+  .jdms-refine {
+    order: 2;
+    max-inline-size: none;
+  }
+}
+
+@media (max-width: 1099px) {
+  .jdms-browse {
+    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .jdms-browse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- upload: numbered sections beside a checklist ---- */
+
+.jdms-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.jdms-upload-form {
+  display: flex;
+  flex: 3 1 520px;
+  flex-direction: column;
+  gap: 16px;
+  min-inline-size: 0;
+}
+
+.jdms-upload-rail {
+  position: sticky;
+  inset-block-start: 24px;
+  flex: 1 1 280px;
+  min-inline-size: 0;
+}
+
+h2.jdms-step-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--jdms-ink);
+}
+
+.jdms-step-number {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 50%;
+  background: var(--jdms-navy);
+  color: #fff;
+  font-size: 12px;
+}
+
+.jdms-file-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  padding: 14px 18px;
+  background: var(--jdms-success-bg);
+  border: 1px solid var(--jdms-success-border);
+  border-radius: 8px;
+}
+
+.jdms-file-icon {
+  font-size: 22px;
+  color: var(--jdms-success-fg);
+}
+
+.jdms-file-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+  font-size: 12px;
+}
+
+.jdms-file-name {
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.jdms-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.jdms-checklist li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.jdms-check-done .anticon {
+  color: var(--jdms-success-fg);
+}
+
+.jdms-check-ring {
+  flex: none;
+  inline-size: 10px;
+  block-size: 10px;
+  border: 1.5px solid var(--jdms-ink-3);
+  border-radius: 50%;
+}
+
+.jdms-check-open {
+  color: var(--jdms-ink-2);
+}
+
+.jdms-rail-section {
+  margin-block: 0 16px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+.jdms-rail-section .jdms-facts-title {
+  margin-block-end: 6px;
+  font-size: 12px;
+}
+
+.jdms-rail-section p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.jdms-upload-rail .ant-alert {
+  margin-block-end: 12px;
+}
+
+.jdms-more.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  padding-inline: 0;
+  font-weight: 500;
+  color: var(--jdms-action);
+}
+
+@media (max-width: 860px) {
+  .jdms-upload-rail {
+    position: static;
+  }
+}
+
+/* ---- governance: records, audit, administration ---- */
+
+.jdms-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.jdms-section {
+  scroll-margin-block-start: 16px;
+}
+
+.jdms-section:focus {
+  outline: none;
+}
+
+h2.jdms-panel-title,
+h3.jdms-panel-title {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.jdms-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-row-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 14px;
+  padding-block: 14px;
+}
+
+.jdms-row-item + .jdms-row-item {
+  border-block-start: 1px solid var(--jdms-divider);
+}
+
+.jdms-row-icon {
+  margin-block-start: 3px;
+  font-size: 18px;
+  color: var(--jdms-warning-fg);
+}
+
+.jdms-row-text {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.jdms-row-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-weight: 600;
+}
+
+.jdms-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.jdms-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.jdms-steps li {
+  position: relative;
+  padding-block: 12px;
+  padding-inline: 44px 14px;
+  background: var(--jdms-footer);
+  border: 1px solid var(--jdms-divider);
+  border-radius: 8px;
+  font-size: 13px;
+  counter-increment: step;
+}
+
+.jdms-steps li::before {
+  content: counter(step);
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-start: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 20px;
+  block-size: 20px;
+  border-radius: 50%;
+  background: var(--jdms-navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.jdms-row-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-inline-size: 640px;
+  padding: 4px 0;
+}
+
+.jdms-row-form label,
+.jdms-confirm-label {
+  font-weight: 500;
+}
+
+.jdms-confirm-label {
+  display: block;
+  margin-block: 12px 6px;
+}
+
+/* the audit chain banner */
+.jdms-chain.ant-card {
+  margin-block-end: 16px;
+}
+
+.jdms-chain-intact.ant-card {
+  border-color: var(--jdms-success-border);
+}
+
+.jdms-chain-broken.ant-card {
+  border-color: var(--jdms-danger-border);
+  background: var(--jdms-danger-bg);
+}
+
+.jdms-chain-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.jdms-chain-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 50%;
+  background: var(--jdms-sunken);
+  font-size: 20px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-chain-intact .jdms-chain-icon {
+  background: var(--jdms-success-bg);
+  color: var(--jdms-success-fg);
+}
+
+.jdms-chain-broken .jdms-chain-icon {
+  background: #fff;
+  color: var(--jdms-danger-fg);
+}
+
+.jdms-chain-text {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-chain-text strong {
+  font-size: 15px;
+  color: var(--jdms-ink);
+}
+
+.jdms-chain-intact .jdms-chain-text strong {
+  color: var(--jdms-success-fg);
+}
+
+.jdms-chain-broken .jdms-chain-text strong {
+  color: var(--jdms-danger-fg);
+}
+
+.jdms-audit-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 16px;
+  border-block-end: 1px solid var(--jdms-divider);
+}
+
+.jdms-filter {
+  display: flex;
+  flex: 1 1 180px;
+  flex-direction: column;
+  gap: 4px;
+  min-inline-size: 0;
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-filter-outcome {
+  flex: none;
+}
+
+.jdms-audit-detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.jdms-audit-detail dt {
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-audit-detail dd {
+  margin: 2px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.jdms-audit-details {
+  grid-column: 1 / -1;
+}
+
+.jdms-audit-details pre {
+  margin: 0;
+  font-family: var(--jdms-font-mono);
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* the access matrix: 24 px cells, the role column stays put while the actions scroll */
+.jdms-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jdms-matrix-scroll {
+  overflow-x: auto;
+}
+
+.jdms-matrix {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.jdms-matrix th,
+.jdms-matrix td {
+  padding: 8px 6px;
+  text-align: center;
+  border-block-end: 1px solid var(--jdms-row);
+}
+
+.jdms-matrix-group {
+  font-weight: 600;
+  color: var(--jdms-ink);
+  border-block-end: 2px solid var(--jdms-navy) !important;
+}
+
+.jdms-group-workflow { border-block-end-color: var(--jdms-gold-accent) !important; }
+.jdms-group-records { border-block-end-color: var(--jdms-success-fg) !important; }
+
+.jdms-matrix-action {
+  min-inline-size: 64px;
+  font-weight: 500;
+  color: var(--jdms-ink-2);
+  vertical-align: bottom;
+}
+
+th.jdms-matrix-role {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  min-inline-size: 170px;
+  padding-inline: 20px 12px;
+  background: var(--jdms-surface);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: start;
+  white-space: nowrap;
+}
+
+thead th.jdms-matrix-role {
+  font-size: 12px;
+  color: var(--jdms-ink-2);
+}
+
+.jdms-matrix-corner {
+  position: sticky;
+  inset-inline-start: 0;
+  background: var(--jdms-surface);
+}
+
+.jdms-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 24px;
+  block-size: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: var(--jdms-sunken);
+  color: #fff;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+button.jdms-cell {
+  cursor: pointer;
+}
+
+button.jdms-cell[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--jdms-surface), 0 0 0 4px var(--jdms-action);
+}
+
+.jdms-cell-allow {
+  background: var(--jdms-action);
+}
+
+.jdms-cell-deny {
+  background: var(--jdms-danger-fg);
+}
+
+.jdms-cell-detail {
+  margin: 16px 20px 20px;
+  padding: 16px 20px;
+  background: var(--jdms-footer);
+  border: 1px solid var(--jdms-divider);
+  border-radius: 8px;
+}
+
+.jdms-cell-detail ul {
+  margin: 0 0 12px;
+  padding-inline-start: 18px;
+}
+
+.jdms-narrower.ant-card {
+  margin-block-start: 24px;
+}
+
+.jdms-narrower .jdms-rows {
+  padding-inline: 20px;
+}
+
+.jdms-card-note {
+  margin: 0;
+  padding: 12px 20px;
+  color: var(--jdms-ink-2);
+  border-block-end: 1px solid var(--jdms-divider);
+}
+
+.jdms-scope-tag {
+  padding: 2px 8px;
+  background: var(--jdms-sunken);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--jdms-neutral-fg);
+}
+
+.jdms-action-checks.ant-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 6px 12px;
+}
+
+/* document types: the list beside the selected type */
+.jdms-master-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.jdms-master {
+  flex: 3 1 560px;
+  min-inline-size: 0;
+}
+
+.jdms-detail {
+  flex: 2 1 320px;
+  min-inline-size: 0;
+}
+
+.jdms-master .ant-table-row {
+  cursor: pointer;
+}
+
+.jdms-type-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.jdms-type-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block-end: 16px;
+  border-block-end: 1px solid var(--jdms-divider);
+}
+
+.jdms-small {
+  font-size: 12px;
+}
+
+.jdms-type-detail .jdms-facts-title {
+  margin: 0;
+  font-size: 12px;
+}
+
+.jdms-field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-field-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--jdms-border);
+  border-radius: 8px;
+}
+
+.jdms-rule-list {
+  margin: 0;
+}
+
+.jdms-rule-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 8px;
+}
+
+.jdms-rule-list dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.jdms-editor form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-inline-size: 1100px;
+}
+
+.jdms-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 32px;
+}
+
+.jdms-field-remove {
+  display: flex;
+  align-items: center;
+  padding-block-start: 22px;
+}
+
+/* ---- polish (phase 6) ---- */
+
+/* the clear buttons inside fields are 12 px icons: give them a 24 px target (WCAG 2.2 target size) */
+.ant-input-clear-icon,
+.ant-select-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 24px;
+  min-block-size: 24px;
+}
+
+/* below lg the task list and the task take turns (TasksPage), so the list may use the full width */
+@media (max-width: 991px) {
+  .jdms-task-list-card {
+    max-inline-size: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .jdms-facts-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jdms-task-head,
+  .jdms-task-body,
+  .jdms-task-footer {
+    padding-inline: 16px;
+  }
+
+  .jdms-decision-hint {
+    margin-inline-start: 0;
+  }
+
+  /* on a phone a pinned decision bar would hide a third of the evidence */
+  .jdms-task-footer {
+    position: static;
+  }
+
+  .jdms-viewer-well {
+    padding: 12px;
+  }
+}
+
+/* ---- phone width ---- */
+
+@media (max-width: 760px) {
+  .jdms-header.ant-layout-header,
+  .jdms-content.ant-layout-content {
+    padding-inline: 16px;
+  }
+
+  .jdms-content.ant-layout-content {
+    padding-block-start: 20px;
+  }
+
+  .jdms-header.ant-layout-header {
+    gap: 8px 12px;
+  }
+
+  .jdms-global-search {
+    order: 2;
+    flex-basis: 100%;
+    max-inline-size: none;
+  }
+
+  .jdms-header-tools {
+    order: 3;
+  }
+
+  .jdms-header-bank,
+  .jdms-user-caret,
+  .jdms-kbd {
+    display: none;
+  }
+
+  /* the avatar alone shows; the name stays for screen readers, as the button's name */
+  .jdms-user-text {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .jdms-header .ant-btn.jdms-user {
+    padding-inline: 4px;
+  }
+
+  .jdms-page-heading h1.ant-typography {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Admin › Languages (ADR-0023): one row per language, its switch at the end */
+.jdms-language-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jdms-language-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 14px;
+  border-block-end: 1px solid var(--jdms-border);
+}
+
+.jdms-language-list .jdms-title-sub {
+  max-inline-size: 60ch;
+}
+
+.jdms-languages-pending {
+  margin-block-end: 8px;
+}
+
+.jdms-languages-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block-start: 20px;
+}
+
+/* Assisted indexing (B-15): what reading the attached file came to, and fields filled in from it */
+.jdms-assist {
+  margin-block-start: 12px;
+}
+
+.jdms-assist p,
+.jdms-assist-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.jdms-suggested {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--jdms-action);
+  font-size: 12px;
+}
+
+.jdms-field-suggested .ant-input,
+.jdms-field-suggested .ant-input-number,
+.jdms-field-suggested .ant-picker,
+.jdms-field-suggested .ant-select-selector {
+  background: var(--jdms-selected);
+}
+
+/* Committees and users (B-17) */
+.jdms-warning-text {
+  color: var(--jdms-warning-fg);
+}
+
+.jdms-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Image previews (B-19): an image original is shown as itself, scaled to the viewer and zoomable */
+.jdms-viewer-image {
+  display: block;
+  max-inline-size: none;
+  block-size: auto;
+  margin-inline: auto;
+}
+
+/* Folders (B-19) */
+.jdms-folder-tree {
+  padding-block: 8px;
+}
+
+.jdms-folder-picker-cabinet {
+  min-inline-size: 140px;
+}
+
+.jdms-folder-picker-tree {
+  flex: 1;
+}

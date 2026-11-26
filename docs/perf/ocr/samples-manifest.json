@@ -1,0 +1,722 @@
+[
+ {
+  "id": "en-salary-1-clean",
+  "language": "en",
+  "template": "salary",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "SALARY CERTIFICATE\nDate: 2026-10-15\nTo whom it may concern\nThis is to certify that Fatma Al Kindi is employed by Sohar Aluminium\nCivil ID: 39968745\nMonthly salary: OMR 8342.769\nAccount number: 0075092891721\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Fatma Al Kindi",
+   "civil_id": "39968745",
+   "amount": "8342.769",
+   "account": "0075092891721",
+   "date": "2026-10-15"
+  }
+ },
+ {
+  "id": "en-salary-1-scan",
+  "language": "en",
+  "template": "salary",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "SALARY CERTIFICATE\nDate: 2026-10-15\nTo whom it may concern\nThis is to certify that Fatma Al Kindi is employed by Sohar Aluminium\nCivil ID: 39968745\nMonthly salary: OMR 8342.769\nAccount number: 0075092891721\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Fatma Al Kindi",
+   "civil_id": "39968745",
+   "amount": "8342.769",
+   "account": "0075092891721",
+   "date": "2026-10-15"
+  }
+ },
+ {
+  "id": "en-salary-1-poor",
+  "language": "en",
+  "template": "salary",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "SALARY CERTIFICATE\nDate: 2026-10-15\nTo whom it may concern\nThis is to certify that Fatma Al Kindi is employed by Sohar Aluminium\nCivil ID: 39968745\nMonthly salary: OMR 8342.769\nAccount number: 0075092891721\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Fatma Al Kindi",
+   "civil_id": "39968745",
+   "amount": "8342.769",
+   "account": "0075092891721",
+   "date": "2026-10-15"
+  }
+ },
+ {
+  "id": "en-salary-2-clean",
+  "language": "en",
+  "template": "salary",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "SALARY CERTIFICATE\nDate: 2026-09-21\nTo whom it may concern\nThis is to certify that Mohammed Al Amri is employed by Muscat Municipality\nCivil ID: 56661846\nMonthly salary: OMR 6466.763\nAccount number: 0017001003053\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "civil_id": "56661846",
+   "amount": "6466.763",
+   "account": "0017001003053",
+   "date": "2026-09-21"
+  }
+ },
+ {
+  "id": "en-salary-2-scan",
+  "language": "en",
+  "template": "salary",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "SALARY CERTIFICATE\nDate: 2026-09-21\nTo whom it may concern\nThis is to certify that Mohammed Al Amri is employed by Muscat Municipality\nCivil ID: 56661846\nMonthly salary: OMR 6466.763\nAccount number: 0017001003053\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "civil_id": "56661846",
+   "amount": "6466.763",
+   "account": "0017001003053",
+   "date": "2026-09-21"
+  }
+ },
+ {
+  "id": "en-salary-2-poor",
+  "language": "en",
+  "template": "salary",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "SALARY CERTIFICATE\nDate: 2026-09-21\nTo whom it may concern\nThis is to certify that Mohammed Al Amri is employed by Muscat Municipality\nCivil ID: 56661846\nMonthly salary: OMR 6466.763\nAccount number: 0017001003053\nThis certificate is issued at the request of the employee",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "civil_id": "56661846",
+   "amount": "6466.763",
+   "account": "0017001003053",
+   "date": "2026-09-21"
+  }
+ },
+ {
+  "id": "en-statement-1-clean",
+  "language": "en",
+  "template": "statement",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "ACCOUNT STATEMENT\nCustomer: Salim Al Rawahi\nCIF: C13320452\nAccount: 0076879142802\nStatement date: 2026-10-18\n2026-01-02 Bank charges +829.000 3903.000\n2026-01-05 Utility bill +415.000 4318.000\n2026-01-08 Bank charges +460.000 4778.000\n2026-01-11 Salary credit +650.000 5428.000\n2026-01-14 Transfer to savings +778.000 6206.000\n2026-01-17 Salary credit -136.000 6070.000\n2026-01-20 ATM withdrawal +671.000 6741.000\n2026-01-23 Loan instalment +874.000 7615.000\nClosing balance: 7615.000",
+  "fields": {
+   "name": "Salim Al Rawahi",
+   "cif": "C13320452",
+   "account": "0076879142802",
+   "amount": "7615.000",
+   "date": "2026-10-18"
+  }
+ },
+ {
+  "id": "en-statement-1-scan",
+  "language": "en",
+  "template": "statement",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "ACCOUNT STATEMENT\nCustomer: Salim Al Rawahi\nCIF: C13320452\nAccount: 0076879142802\nStatement date: 2026-10-18\n2026-01-02 Bank charges +829.000 3903.000\n2026-01-05 Utility bill +415.000 4318.000\n2026-01-08 Bank charges +460.000 4778.000\n2026-01-11 Salary credit +650.000 5428.000\n2026-01-14 Transfer to savings +778.000 6206.000\n2026-01-17 Salary credit -136.000 6070.000\n2026-01-20 ATM withdrawal +671.000 6741.000\n2026-01-23 Loan instalment +874.000 7615.000\nClosing balance: 7615.000",
+  "fields": {
+   "name": "Salim Al Rawahi",
+   "cif": "C13320452",
+   "account": "0076879142802",
+   "amount": "7615.000",
+   "date": "2026-10-18"
+  }
+ },
+ {
+  "id": "en-statement-1-poor",
+  "language": "en",
+  "template": "statement",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "ACCOUNT STATEMENT\nCustomer: Salim Al Rawahi\nCIF: C13320452\nAccount: 0076879142802\nStatement date: 2026-10-18\n2026-01-02 Bank charges +829.000 3903.000\n2026-01-05 Utility bill +415.000 4318.000\n2026-01-08 Bank charges +460.000 4778.000\n2026-01-11 Salary credit +650.000 5428.000\n2026-01-14 Transfer to savings +778.000 6206.000\n2026-01-17 Salary credit -136.000 6070.000\n2026-01-20 ATM withdrawal +671.000 6741.000\n2026-01-23 Loan instalment +874.000 7615.000\nClosing balance: 7615.000",
+  "fields": {
+   "name": "Salim Al Rawahi",
+   "cif": "C13320452",
+   "account": "0076879142802",
+   "amount": "7615.000",
+   "date": "2026-10-18"
+  }
+ },
+ {
+  "id": "en-statement-2-clean",
+  "language": "en",
+  "template": "statement",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "ACCOUNT STATEMENT\nCustomer: Huda Al Amri\nCIF: C83233523\nAccount: 0027699273039\nStatement date: 2026-08-26\n2026-01-02 Salary credit +150.000 2355.000\n2026-01-05 Card purchase -333.000 2022.000\n2026-01-08 Bank charges +823.000 2845.000\n2026-01-11 Bank charges +670.000 3515.000\n2026-01-14 Transfer to savings +337.000 3852.000\n2026-01-17 Bank charges +132.000 3984.000\n2026-01-20 Bank charges +555.000 4539.000\n2026-01-23 Salary credit +489.000 5028.000\nClosing balance: 5028.000",
+  "fields": {
+   "name": "Huda Al Amri",
+   "cif": "C83233523",
+   "account": "0027699273039",
+   "amount": "5028.000",
+   "date": "2026-08-26"
+  }
+ },
+ {
+  "id": "en-statement-2-scan",
+  "language": "en",
+  "template": "statement",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "ACCOUNT STATEMENT\nCustomer: Huda Al Amri\nCIF: C83233523\nAccount: 0027699273039\nStatement date: 2026-08-26\n2026-01-02 Salary credit +150.000 2355.000\n2026-01-05 Card purchase -333.000 2022.000\n2026-01-08 Bank charges +823.000 2845.000\n2026-01-11 Bank charges +670.000 3515.000\n2026-01-14 Transfer to savings +337.000 3852.000\n2026-01-17 Bank charges +132.000 3984.000\n2026-01-20 Bank charges +555.000 4539.000\n2026-01-23 Salary credit +489.000 5028.000\nClosing balance: 5028.000",
+  "fields": {
+   "name": "Huda Al Amri",
+   "cif": "C83233523",
+   "account": "0027699273039",
+   "amount": "5028.000",
+   "date": "2026-08-26"
+  }
+ },
+ {
+  "id": "en-statement-2-poor",
+  "language": "en",
+  "template": "statement",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "ACCOUNT STATEMENT\nCustomer: Huda Al Amri\nCIF: C83233523\nAccount: 0027699273039\nStatement date: 2026-08-26\n2026-01-02 Salary credit +150.000 2355.000\n2026-01-05 Card purchase -333.000 2022.000\n2026-01-08 Bank charges +823.000 2845.000\n2026-01-11 Bank charges +670.000 3515.000\n2026-01-14 Transfer to savings +337.000 3852.000\n2026-01-17 Bank charges +132.000 3984.000\n2026-01-20 Bank charges +555.000 4539.000\n2026-01-23 Salary credit +489.000 5028.000\nClosing balance: 5028.000",
+  "fields": {
+   "name": "Huda Al Amri",
+   "cif": "C83233523",
+   "account": "0027699273039",
+   "amount": "5028.000",
+   "date": "2026-08-26"
+  }
+ },
+ {
+  "id": "en-loan-1-clean",
+  "language": "en",
+  "template": "loan",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "LOAN AGREEMENT No. LN203790621\nBorrower: Fatma Al Amri\nCIF: C79145394\nLoan amount: OMR 1353.6640\nTenor: 24 months\nAgreement date: 2026-05-16\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Fatma Al Amri",
+   "loan": "LN203790621",
+   "cif": "C79145394",
+   "amount": "1353.6640",
+   "date": "2026-05-16"
+  }
+ },
+ {
+  "id": "en-loan-1-scan",
+  "language": "en",
+  "template": "loan",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "LOAN AGREEMENT No. LN203790621\nBorrower: Fatma Al Amri\nCIF: C79145394\nLoan amount: OMR 1353.6640\nTenor: 24 months\nAgreement date: 2026-05-16\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Fatma Al Amri",
+   "loan": "LN203790621",
+   "cif": "C79145394",
+   "amount": "1353.6640",
+   "date": "2026-05-16"
+  }
+ },
+ {
+  "id": "en-loan-1-poor",
+  "language": "en",
+  "template": "loan",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "LOAN AGREEMENT No. LN203790621\nBorrower: Fatma Al Amri\nCIF: C79145394\nLoan amount: OMR 1353.6640\nTenor: 24 months\nAgreement date: 2026-05-16\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Fatma Al Amri",
+   "loan": "LN203790621",
+   "cif": "C79145394",
+   "amount": "1353.6640",
+   "date": "2026-05-16"
+  }
+ },
+ {
+  "id": "en-loan-2-clean",
+  "language": "en",
+  "template": "loan",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "LOAN AGREEMENT No. LN388338803\nBorrower: Mohammed Al Amri\nCIF: C87932180\nLoan amount: OMR 2279.6350\nTenor: 84 months\nAgreement date: 2026-01-25\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "loan": "LN388338803",
+   "cif": "C87932180",
+   "amount": "2279.6350",
+   "date": "2026-01-25"
+  }
+ },
+ {
+  "id": "en-loan-2-scan",
+  "language": "en",
+  "template": "loan",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "LOAN AGREEMENT No. LN388338803\nBorrower: Mohammed Al Amri\nCIF: C87932180\nLoan amount: OMR 2279.6350\nTenor: 84 months\nAgreement date: 2026-01-25\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "loan": "LN388338803",
+   "cif": "C87932180",
+   "amount": "2279.6350",
+   "date": "2026-01-25"
+  }
+ },
+ {
+  "id": "en-loan-2-poor",
+  "language": "en",
+  "template": "loan",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "LOAN AGREEMENT No. LN388338803\nBorrower: Mohammed Al Amri\nCIF: C87932180\nLoan amount: OMR 2279.6350\nTenor: 84 months\nAgreement date: 2026-01-25\nThe borrower shall pay each monthly instalment on its due date\nThe bank may demand the full amount if any instalment is overdue",
+  "fields": {
+   "name": "Mohammed Al Amri",
+   "loan": "LN388338803",
+   "cif": "C87932180",
+   "amount": "2279.6350",
+   "date": "2026-01-25"
+  }
+ },
+ {
+  "id": "en-kyc-1-clean",
+  "language": "en",
+  "template": "kyc",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Layla Al Amri\nNationality: Omani\nPassport number: P3201443\nCivil ID: 88911235\nExpiry date: 2026-02-14\nCIF: C28101218\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Layla Al Amri",
+   "passport": "P3201443",
+   "civil_id": "88911235",
+   "cif": "C28101218",
+   "date": "2026-02-14"
+  }
+ },
+ {
+  "id": "en-kyc-1-scan",
+  "language": "en",
+  "template": "kyc",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Layla Al Amri\nNationality: Omani\nPassport number: P3201443\nCivil ID: 88911235\nExpiry date: 2026-02-14\nCIF: C28101218\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Layla Al Amri",
+   "passport": "P3201443",
+   "civil_id": "88911235",
+   "cif": "C28101218",
+   "date": "2026-02-14"
+  }
+ },
+ {
+  "id": "en-kyc-1-poor",
+  "language": "en",
+  "template": "kyc",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Layla Al Amri\nNationality: Omani\nPassport number: P3201443\nCivil ID: 88911235\nExpiry date: 2026-02-14\nCIF: C28101218\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Layla Al Amri",
+   "passport": "P3201443",
+   "civil_id": "88911235",
+   "cif": "C28101218",
+   "date": "2026-02-14"
+  }
+ },
+ {
+  "id": "en-kyc-2-clean",
+  "language": "en",
+  "template": "kyc",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Rashid Al Busaidi\nNationality: Omani\nPassport number: P7532175\nCivil ID: 24245056\nExpiry date: 2026-06-21\nCIF: C79797368\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Rashid Al Busaidi",
+   "passport": "P7532175",
+   "civil_id": "24245056",
+   "cif": "C79797368",
+   "date": "2026-06-21"
+  }
+ },
+ {
+  "id": "en-kyc-2-scan",
+  "language": "en",
+  "template": "kyc",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Rashid Al Busaidi\nNationality: Omani\nPassport number: P7532175\nCivil ID: 24245056\nExpiry date: 2026-06-21\nCIF: C79797368\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Rashid Al Busaidi",
+   "passport": "P7532175",
+   "civil_id": "24245056",
+   "cif": "C79797368",
+   "date": "2026-06-21"
+  }
+ },
+ {
+  "id": "en-kyc-2-poor",
+  "language": "en",
+  "template": "kyc",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "IDENTITY VERIFICATION FORM\nFull name: Rashid Al Busaidi\nNationality: Omani\nPassport number: P7532175\nCivil ID: 24245056\nExpiry date: 2026-06-21\nCIF: C79797368\nThe photograph was matched with the holder of the document",
+  "fields": {
+   "name": "Rashid Al Busaidi",
+   "passport": "P7532175",
+   "civil_id": "24245056",
+   "cif": "C79797368",
+   "date": "2026-06-21"
+  }
+ },
+ {
+  "id": "ar-salary-1-clean",
+  "language": "ar",
+  "template": "salary",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "شهادة راتب\nالتاريخ: 2026-10-11\nإلى من يهمه الأمر\nنشهد بأن السيد هدى مريم الحارثي يعمل لدى العبارات الوطنية\nالرقم المدني: 30654844\nالراتب الشهري: 3691.444 ريال عماني\nرقم الحساب: 0024457185027\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "هدى مريم الحارثي",
+   "civil_id": "30654844",
+   "amount": "3691.444",
+   "account": "0024457185027",
+   "date": "2026-10-11"
+  }
+ },
+ {
+  "id": "ar-salary-1-scan",
+  "language": "ar",
+  "template": "salary",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "شهادة راتب\nالتاريخ: 2026-10-11\nإلى من يهمه الأمر\nنشهد بأن السيد هدى مريم الحارثي يعمل لدى العبارات الوطنية\nالرقم المدني: 30654844\nالراتب الشهري: 3691.444 ريال عماني\nرقم الحساب: 0024457185027\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "هدى مريم الحارثي",
+   "civil_id": "30654844",
+   "amount": "3691.444",
+   "account": "0024457185027",
+   "date": "2026-10-11"
+  }
+ },
+ {
+  "id": "ar-salary-1-poor",
+  "language": "ar",
+  "template": "salary",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "شهادة راتب\nالتاريخ: 2026-10-11\nإلى من يهمه الأمر\nنشهد بأن السيد هدى مريم الحارثي يعمل لدى العبارات الوطنية\nالرقم المدني: 30654844\nالراتب الشهري: 3691.444 ريال عماني\nرقم الحساب: 0024457185027\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "هدى مريم الحارثي",
+   "civil_id": "30654844",
+   "amount": "3691.444",
+   "account": "0024457185027",
+   "date": "2026-10-11"
+  }
+ },
+ {
+  "id": "ar-salary-2-clean",
+  "language": "ar",
+  "template": "salary",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "شهادة راتب\nالتاريخ: 2026-09-05\nإلى من يهمه الأمر\nنشهد بأن السيد محمد يوسف البلوشي يعمل لدى صحار للألمنيوم\nالرقم المدني: 12747414\nالراتب الشهري: 8982.223 ريال عماني\nرقم الحساب: 0076104694451\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "محمد يوسف البلوشي",
+   "civil_id": "12747414",
+   "amount": "8982.223",
+   "account": "0076104694451",
+   "date": "2026-09-05"
+  }
+ },
+ {
+  "id": "ar-salary-2-scan",
+  "language": "ar",
+  "template": "salary",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "شهادة راتب\nالتاريخ: 2026-09-05\nإلى من يهمه الأمر\nنشهد بأن السيد محمد يوسف البلوشي يعمل لدى صحار للألمنيوم\nالرقم المدني: 12747414\nالراتب الشهري: 8982.223 ريال عماني\nرقم الحساب: 0076104694451\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "محمد يوسف البلوشي",
+   "civil_id": "12747414",
+   "amount": "8982.223",
+   "account": "0076104694451",
+   "date": "2026-09-05"
+  }
+ },
+ {
+  "id": "ar-salary-2-poor",
+  "language": "ar",
+  "template": "salary",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "شهادة راتب\nالتاريخ: 2026-09-05\nإلى من يهمه الأمر\nنشهد بأن السيد محمد يوسف البلوشي يعمل لدى صحار للألمنيوم\nالرقم المدني: 12747414\nالراتب الشهري: 8982.223 ريال عماني\nرقم الحساب: 0076104694451\nأعطيت هذه الشهادة بناء على طلبه دون أدنى مسؤولية",
+  "fields": {
+   "name": "محمد يوسف البلوشي",
+   "civil_id": "12747414",
+   "amount": "8982.223",
+   "account": "0076104694451",
+   "date": "2026-09-05"
+  }
+ },
+ {
+  "id": "ar-statement-1-clean",
+  "language": "ar",
+  "template": "statement",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "كشف حساب\nالعميل: يوسف راشد الحارثي\nرقم العميل: C61430266\nرقم الحساب: 0026098979957\nتاريخ الكشف: 2026-07-10\n2026-01-02 رسوم بنكية +587.000 3714.000\n2026-01-05 فاتورة كهرباء -155.000 3559.000\n2026-01-08 تحويل إلى التوفير -207.000 3352.000\n2026-01-11 إيداع راتب +73.000 3425.000\n2026-01-14 رسوم بنكية -210.000 3215.000\n2026-01-17 قسط قرض +276.000 3491.000\n2026-01-20 شراء بالبطاقة +716.000 4207.000\n2026-01-23 إيداع شيك -345.000 3862.000\nالرصيد الختامي: 3862.000",
+  "fields": {
+   "name": "يوسف راشد الحارثي",
+   "cif": "C61430266",
+   "account": "0026098979957",
+   "amount": "3862.000",
+   "date": "2026-07-10"
+  }
+ },
+ {
+  "id": "ar-statement-1-scan",
+  "language": "ar",
+  "template": "statement",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "كشف حساب\nالعميل: يوسف راشد الحارثي\nرقم العميل: C61430266\nرقم الحساب: 0026098979957\nتاريخ الكشف: 2026-07-10\n2026-01-02 رسوم بنكية +587.000 3714.000\n2026-01-05 فاتورة كهرباء -155.000 3559.000\n2026-01-08 تحويل إلى التوفير -207.000 3352.000\n2026-01-11 إيداع راتب +73.000 3425.000\n2026-01-14 رسوم بنكية -210.000 3215.000\n2026-01-17 قسط قرض +276.000 3491.000\n2026-01-20 شراء بالبطاقة +716.000 4207.000\n2026-01-23 إيداع شيك -345.000 3862.000\nالرصيد الختامي: 3862.000",
+  "fields": {
+   "name": "يوسف راشد الحارثي",
+   "cif": "C61430266",
+   "account": "0026098979957",
+   "amount": "3862.000",
+   "date": "2026-07-10"
+  }
+ },
+ {
+  "id": "ar-statement-1-poor",
+  "language": "ar",
+  "template": "statement",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "كشف حساب\nالعميل: يوسف راشد الحارثي\nرقم العميل: C61430266\nرقم الحساب: 0026098979957\nتاريخ الكشف: 2026-07-10\n2026-01-02 رسوم بنكية +587.000 3714.000\n2026-01-05 فاتورة كهرباء -155.000 3559.000\n2026-01-08 تحويل إلى التوفير -207.000 3352.000\n2026-01-11 إيداع راتب +73.000 3425.000\n2026-01-14 رسوم بنكية -210.000 3215.000\n2026-01-17 قسط قرض +276.000 3491.000\n2026-01-20 شراء بالبطاقة +716.000 4207.000\n2026-01-23 إيداع شيك -345.000 3862.000\nالرصيد الختامي: 3862.000",
+  "fields": {
+   "name": "يوسف راشد الحارثي",
+   "cif": "C61430266",
+   "account": "0026098979957",
+   "amount": "3862.000",
+   "date": "2026-07-10"
+  }
+ },
+ {
+  "id": "ar-statement-2-clean",
+  "language": "ar",
+  "template": "statement",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "كشف حساب\nالعميل: ليلى خالد الهنائي\nرقم العميل: C86481961\nرقم الحساب: 0027712309698\nتاريخ الكشف: 2026-05-04\n2026-01-02 إيداع شيك -277.000 3526.000\n2026-01-05 سحب نقدي -21.000 3505.000\n2026-01-08 إيداع شيك +637.000 4142.000\n2026-01-11 سحب نقدي +166.000 4308.000\n2026-01-14 إيداع شيك +196.000 4504.000\n2026-01-17 فاتورة كهرباء -70.000 4434.000\n2026-01-20 سحب نقدي +124.000 4558.000\n2026-01-23 قسط قرض -372.000 4186.000\nالرصيد الختامي: 4186.000",
+  "fields": {
+   "name": "ليلى خالد الهنائي",
+   "cif": "C86481961",
+   "account": "0027712309698",
+   "amount": "4186.000",
+   "date": "2026-05-04"
+  }
+ },
+ {
+  "id": "ar-statement-2-scan",
+  "language": "ar",
+  "template": "statement",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "كشف حساب\nالعميل: ليلى خالد الهنائي\nرقم العميل: C86481961\nرقم الحساب: 0027712309698\nتاريخ الكشف: 2026-05-04\n2026-01-02 إيداع شيك -277.000 3526.000\n2026-01-05 سحب نقدي -21.000 3505.000\n2026-01-08 إيداع شيك +637.000 4142.000\n2026-01-11 سحب نقدي +166.000 4308.000\n2026-01-14 إيداع شيك +196.000 4504.000\n2026-01-17 فاتورة كهرباء -70.000 4434.000\n2026-01-20 سحب نقدي +124.000 4558.000\n2026-01-23 قسط قرض -372.000 4186.000\nالرصيد الختامي: 4186.000",
+  "fields": {
+   "name": "ليلى خالد الهنائي",
+   "cif": "C86481961",
+   "account": "0027712309698",
+   "amount": "4186.000",
+   "date": "2026-05-04"
+  }
+ },
+ {
+  "id": "ar-statement-2-poor",
+  "language": "ar",
+  "template": "statement",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "كشف حساب\nالعميل: ليلى خالد الهنائي\nرقم العميل: C86481961\nرقم الحساب: 0027712309698\nتاريخ الكشف: 2026-05-04\n2026-01-02 إيداع شيك -277.000 3526.000\n2026-01-05 سحب نقدي -21.000 3505.000\n2026-01-08 إيداع شيك +637.000 4142.000\n2026-01-11 سحب نقدي +166.000 4308.000\n2026-01-14 إيداع شيك +196.000 4504.000\n2026-01-17 فاتورة كهرباء -70.000 4434.000\n2026-01-20 سحب نقدي +124.000 4558.000\n2026-01-23 قسط قرض -372.000 4186.000\nالرصيد الختامي: 4186.000",
+  "fields": {
+   "name": "ليلى خالد الهنائي",
+   "cif": "C86481961",
+   "account": "0027712309698",
+   "amount": "4186.000",
+   "date": "2026-05-04"
+  }
+ },
+ {
+  "id": "ar-loan-1-clean",
+  "language": "ar",
+  "template": "loan",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "اتفاقية قرض رقم LN140813845\nالمقترض: محمد فاطمة الهنائي\nرقم العميل: C13084015\nمبلغ القرض: 5460.7980 ريال عماني\nمدة القرض: 48 شهراً\nتاريخ الاتفاقية: 2026-08-20\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "محمد فاطمة الهنائي",
+   "loan": "LN140813845",
+   "cif": "C13084015",
+   "amount": "5460.7980",
+   "date": "2026-08-20"
+  }
+ },
+ {
+  "id": "ar-loan-1-scan",
+  "language": "ar",
+  "template": "loan",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "اتفاقية قرض رقم LN140813845\nالمقترض: محمد فاطمة الهنائي\nرقم العميل: C13084015\nمبلغ القرض: 5460.7980 ريال عماني\nمدة القرض: 48 شهراً\nتاريخ الاتفاقية: 2026-08-20\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "محمد فاطمة الهنائي",
+   "loan": "LN140813845",
+   "cif": "C13084015",
+   "amount": "5460.7980",
+   "date": "2026-08-20"
+  }
+ },
+ {
+  "id": "ar-loan-1-poor",
+  "language": "ar",
+  "template": "loan",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "اتفاقية قرض رقم LN140813845\nالمقترض: محمد فاطمة الهنائي\nرقم العميل: C13084015\nمبلغ القرض: 5460.7980 ريال عماني\nمدة القرض: 48 شهراً\nتاريخ الاتفاقية: 2026-08-20\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "محمد فاطمة الهنائي",
+   "loan": "LN140813845",
+   "cif": "C13084015",
+   "amount": "5460.7980",
+   "date": "2026-08-20"
+  }
+ },
+ {
+  "id": "ar-loan-2-clean",
+  "language": "ar",
+  "template": "loan",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "اتفاقية قرض رقم LN418839064\nالمقترض: مريم يوسف الرواحي\nرقم العميل: C62217045\nمبلغ القرض: 4910.7110 ريال عماني\nمدة القرض: 120 شهراً\nتاريخ الاتفاقية: 2026-06-10\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "مريم يوسف الرواحي",
+   "loan": "LN418839064",
+   "cif": "C62217045",
+   "amount": "4910.7110",
+   "date": "2026-06-10"
+  }
+ },
+ {
+  "id": "ar-loan-2-scan",
+  "language": "ar",
+  "template": "loan",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "اتفاقية قرض رقم LN418839064\nالمقترض: مريم يوسف الرواحي\nرقم العميل: C62217045\nمبلغ القرض: 4910.7110 ريال عماني\nمدة القرض: 120 شهراً\nتاريخ الاتفاقية: 2026-06-10\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "مريم يوسف الرواحي",
+   "loan": "LN418839064",
+   "cif": "C62217045",
+   "amount": "4910.7110",
+   "date": "2026-06-10"
+  }
+ },
+ {
+  "id": "ar-loan-2-poor",
+  "language": "ar",
+  "template": "loan",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "اتفاقية قرض رقم LN418839064\nالمقترض: مريم يوسف الرواحي\nرقم العميل: C62217045\nمبلغ القرض: 4910.7110 ريال عماني\nمدة القرض: 120 شهراً\nتاريخ الاتفاقية: 2026-06-10\nيتعهد المقترض بسداد الأقساط الشهرية في موعدها\nيحق للبنك المطالبة بكامل المبلغ عند التأخر في السداد",
+  "fields": {
+   "name": "مريم يوسف الرواحي",
+   "loan": "LN418839064",
+   "cif": "C62217045",
+   "amount": "4910.7110",
+   "date": "2026-06-10"
+  }
+ },
+ {
+  "id": "ar-kyc-1-clean",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: عائشة يوسف البلوشي\nالجنسية: عماني\nرقم جواز السفر: P1626104\nالرقم المدني: 25875669\nتاريخ الانتهاء: 2026-06-20\nرقم العميل: C25112594\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "عائشة يوسف البلوشي",
+   "passport": "P1626104",
+   "civil_id": "25875669",
+   "cif": "C25112594",
+   "date": "2026-06-20"
+  }
+ },
+ {
+  "id": "ar-kyc-1-scan",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: عائشة يوسف البلوشي\nالجنسية: عماني\nرقم جواز السفر: P1626104\nالرقم المدني: 25875669\nتاريخ الانتهاء: 2026-06-20\nرقم العميل: C25112594\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "عائشة يوسف البلوشي",
+   "passport": "P1626104",
+   "civil_id": "25875669",
+   "cif": "C25112594",
+   "date": "2026-06-20"
+  }
+ },
+ {
+  "id": "ar-kyc-1-poor",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: عائشة يوسف البلوشي\nالجنسية: عماني\nرقم جواز السفر: P1626104\nالرقم المدني: 25875669\nتاريخ الانتهاء: 2026-06-20\nرقم العميل: C25112594\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "عائشة يوسف البلوشي",
+   "passport": "P1626104",
+   "civil_id": "25875669",
+   "cif": "C25112594",
+   "date": "2026-06-20"
+  }
+ },
+ {
+  "id": "ar-kyc-2-clean",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "clean",
+  "dpi": 300,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: راشد راشد الهنائي\nالجنسية: عماني\nرقم جواز السفر: P1476760\nالرقم المدني: 82870437\nتاريخ الانتهاء: 2026-05-26\nرقم العميل: C66503709\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "راشد راشد الهنائي",
+   "passport": "P1476760",
+   "civil_id": "82870437",
+   "cif": "C66503709",
+   "date": "2026-05-26"
+  }
+ },
+ {
+  "id": "ar-kyc-2-scan",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "scan",
+  "dpi": 200,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: راشد راشد الهنائي\nالجنسية: عماني\nرقم جواز السفر: P1476760\nالرقم المدني: 82870437\nتاريخ الانتهاء: 2026-05-26\nرقم العميل: C66503709\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "راشد راشد الهنائي",
+   "passport": "P1476760",
+   "civil_id": "82870437",
+   "cif": "C66503709",
+   "date": "2026-05-26"
+  }
+ },
+ {
+  "id": "ar-kyc-2-poor",
+  "language": "ar",
+  "template": "kyc",
+  "quality": "poor",
+  "dpi": 150,
+  "text": "نموذج التحقق من الهوية\nالاسم الكامل: راشد راشد الهنائي\nالجنسية: عماني\nرقم جواز السفر: P1476760\nالرقم المدني: 82870437\nتاريخ الانتهاء: 2026-05-26\nرقم العميل: C66503709\nتمت مطابقة الصورة مع حامل الوثيقة",
+  "fields": {
+   "name": "راشد راشد الهنائي",
+   "passport": "P1476760",
+   "civil_id": "82870437",
+   "cif": "C66503709",
+   "date": "2026-05-26"
+  }
+ }
+]

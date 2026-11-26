@@ -1,0 +1,58 @@
+# JDMS Next worker. Secrets and environment-specific values come from environment variables only.
+spring:
+  application:
+    name: jdms-worker
+  threads:
+    virtual:
+      enabled: true
+  # The core's database: the worker reads versions and uses the job table; the core owns the schema (no migrations)
+  datasource:
+    url: ${JDMS_DB_URL}
+    username: ${JDMS_DB_USERNAME}
+    password: ${JDMS_DB_PASSWORD}
+
+# The worker has no API: its only HTTP port is the management port.
+server:
+  port: ${JDMS_WORKER_MANAGEMENT_PORT:8091}
+  error:
+    include-message: never
+    include-stacktrace: never
+
+jdms:
+  storage:
+    endpoint: ${JDMS_S3_ENDPOINT}
+    region: ${JDMS_S3_REGION:us-east-1}
+    bucket: ${JDMS_S3_BUCKET}
+    access-key: ${JDMS_S3_ACCESS_KEY}
+    secret-key: ${JDMS_S3_SECRET_KEY}
+  kms:
+    local-master-key: ${JDMS_LOCAL_KMS_MASTER_KEY:}
+  # Limits and endpoints: see WorkerProperties
+  worker:
+    max-input-mb: ${JDMS_WORKER_MAX_INPUT_MB:100}
+    clamav:
+      host: ${JDMS_CLAMAV_HOST:localhost}
+      port: ${CLAMAV_PORT:3310}
+    tika:
+      url: ${JDMS_TIKA_URL:http://localhost:9998}
+    gotenberg:
+      url: ${JDMS_GOTENBERG_URL:http://localhost:3300}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  structured:
+    format:
+      console: logstash

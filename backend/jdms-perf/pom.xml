@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.jmr.jdms</groupId>
+        <artifactId>jdms-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jdms-perf</artifactId>
+    <name>JDMS Next performance tooling</name>
+    <description>Test tooling only, never shipped (B-13, ADR-0021): synthetic data generator and Gatling load tests</description>
+
+    <properties>
+        <gatling.version>3.16.0</gatling.version>
+        <gatling-maven-plugin.version>4.21.12</gatling-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <!-- envelope encryption and the S3 blob store, exactly as the core writes content -->
+            <groupId>com.jmr.jdms</groupId>
+            <artifactId>jdms-platform</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- Gatling: core Apache-2.0; the HTML report module is under the "Gatling Highcharts" licence, approved
+                 for this test-only module (ADR-0021). Test scope: never in a shipped artefact. -->
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- digital PDFs uploaded by the ingest simulation -->
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- not bound to the lifecycle: run with ./mvnw -pl jdms-perf gatling:test (docs/perf/README.md) -->
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>${gatling-maven-plugin.version}</version>
+                <configuration>
+                    <resultsFolder>${project.build.directory}/gatling</resultsFolder>
+                    <jvmArgs>
+                        <!-- where the simulations write their wall-clock latencies (Latencies) -->
+                        <jvmArg>-Djdms.perf.out=${project.build.directory}/gatling</jvmArg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

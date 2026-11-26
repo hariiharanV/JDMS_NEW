@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="approvalStages" name="Approval stages"
+             namespace="https://jdms.jmr.com/approval">
+  <!--
+    Stage routing for multi-stage-approval (spec §4.4). Every matching rule adds a stage; stages run in stageOrder.
+    Inputs: documentTypeCode, documentCategory, branchCode, classification, amount (the document's "amount" field, 0
+    when it has none). candidateRoles: comma-separated realm roles that decide the stage; slaHours: stage SLA.
+    A tenant can override this table by deploying its own version under its tenant ID.
+  -->
+  <decision id="approval-stages" name="Approval stages">
+    <decisionTable id="approvalStagesTable" hitPolicy="COLLECT">
+      <input id="inDocumentType" label="Document type">
+        <inputExpression id="inDocumentTypeExpr" typeRef="string"><text>documentTypeCode</text></inputExpression>
+      </input>
+      <input id="inAmount" label="Amount">
+        <inputExpression id="inAmountExpr" typeRef="number"><text>amount</text></inputExpression>
+      </input>
+      <output id="outOrder" label="Order" name="stageOrder" typeRef="number"/>
+      <output id="outKey" label="Stage key" name="stageKey" typeRef="string"/>
+      <output id="outName" label="Stage name" name="stageName" typeRef="string"/>
+      <output id="outRoles" label="Candidate roles" name="candidateRoles" typeRef="string"/>
+      <output id="outSla" label="SLA hours" name="slaHours" typeRef="number"/>
+      <rule id="branchReview">
+        <description>Every item is reviewed by a checker of its branch</description>
+        <inputEntry id="branchReviewType"><text>-</text></inputEntry>
+        <inputEntry id="branchReviewAmount"><text>-</text></inputEntry>
+        <outputEntry id="branchReviewOrder"><text>1</text></outputEntry>
+        <outputEntry id="branchReviewKey"><text>"BRANCH_REVIEW"</text></outputEntry>
+        <outputEntry id="branchReviewName"><text>"Branch review"</text></outputEntry>
+        <outputEntry id="branchReviewRoles"><text>"CHECKER"</text></outputEntry>
+        <outputEntry id="branchReviewSla"><text>24</text></outputEntry>
+      </rule>
+      <rule id="creditCommittee">
+        <description>Loan agreements above the threshold also need the credit committee</description>
+        <inputEntry id="creditCommitteeType"><text>"LOAN_AGREEMENT"</text></inputEntry>
+        <inputEntry id="creditCommitteeAmount"><text>&gt; 100000</text></inputEntry>
+        <outputEntry id="creditCommitteeOrder"><text>2</text></outputEntry>
+        <outputEntry id="creditCommitteeKey"><text>"CREDIT_COMMITTEE"</text></outputEntry>
+        <outputEntry id="creditCommitteeName"><text>"Credit committee"</text></outputEntry>
+        <outputEntry id="creditCommitteeRoles"><text>"COMMITTEE_MEMBER"</text></outputEntry>
+        <outputEntry id="creditCommitteeSla"><text>48</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

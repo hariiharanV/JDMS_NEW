@@ -1,0 +1,5 @@
+Apache-2.0|Apache License, Version 2.0|The Apache Software License, Version 2.0|The Apache License, Version 2.0|Apache License 2.0|Apache License Version 2.0|Apache 2.0|Apache 2|Apache v2
+MIT|The MIT License|MIT License
+BSD-3-Clause|Eclipse Distribution License - v 1.0|Eclipse Distribution License v. 1.0|EDL 1.0|New BSD License|BSD 3-Clause License
+BSD-2-Clause|The BSD 2-Clause License
+EPL-2.0|EPL 2.0|Eclipse Public License - v 2.0|Eclipse Public License v. 2.0|Eclipse Public License 2.0

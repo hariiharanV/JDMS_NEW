@@ -1,0 +1,41 @@
+# JDMS Next performance tooling (B-13, ADR-0021). Test environments only; every secret comes from the environment.
+spring:
+  application:
+    name: jdms-perf
+  main:
+    web-application-type: none
+    banner-mode: off
+    lazy-initialization: true
+  # the core's database (application user); the generator writes the synthetic tenant only
+  datasource:
+    url: jdbc:postgresql://localhost:${JDMS_DB_PORT:5432}/${JDMS_DB_NAME:jdms}?reWriteBatchedInserts=true
+    username: ${JDMS_DB_USERNAME:jdms_app}
+    password: ${JDMS_DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 4
+
+jdms:
+  storage:
+    endpoint: http://localhost:${S3_PORT:8333}
+    region: us-east-1
+    bucket: ${JDMS_S3_BUCKET:jdms-local}
+    access-key: ${JDMS_S3_ACCESS_KEY:}
+    secret-key: ${JDMS_S3_SECRET_KEY:}
+  kms:
+    local-master-key: ${JDMS_LOCAL_KMS_MASTER_KEY:}
+  perf:
+    tenant-code: PERF
+    # total synthetic documents wanted in the tenant; a re-run continues from what is there
+    documents: 1000000
+    batch-size: 1000
+    # concurrent blob uploads
+    concurrency: 32
+    # share of documents written in Arabic
+    arabic-share: 0.3
+    customers: 200000
+    seed: 20261025
+
+logging:
+  structured:
+    format:
+      console: logstash

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  committee-approval (spec §4.4): every committee member (except the maker) gets a vote. Approved as soon as the
+  approvals reach the quorum; rejected as soon as the quorum can no longer be reached. Open votes are then withdrawn.
+  The committee comes from the approval-committee DMN table; members are fixed when the item is submitted. Votes are
+  counted from the approval history, which is written in the same transaction as each vote.
+-->
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="https://jdms.jmr.com/approval">
+  <process id="committee-approval" name="Committee approval" isExecutable="true">
+    <startEvent id="start"/>
+    <sequenceFlow id="toVote" sourceRef="start" targetRef="vote"/>
+
+    <userTask id="vote" name="Committee vote" flowable:assignee="${member}">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${approvalTaskSetup}"/>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false"
+                                        flowable:collection="${approvalPlan.members(execution)}"
+                                        flowable:elementVariable="member">
+        <completionCondition>${approvalPlan.voteSettled(execution)}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="toTally" sourceRef="vote" targetRef="tally"/>
+
+    <exclusiveGateway id="tally" default="tallyReject"/>
+    <sequenceFlow id="tallyApprove" sourceRef="tally" targetRef="approved">
+      <conditionExpression xsi:type="tFormalExpression">${approvalPlan.voteApproved(execution)}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="tallyReject" sourceRef="tally" targetRef="rejected"/>
+
+    <serviceTask id="approved" name="Approved" flowable:expression="${approvalOutcome.notify(execution, 'APPROVED')}"/>
+    <sequenceFlow id="toEndApproved" sourceRef="approved" targetRef="endApproved"/>
+    <endEvent id="endApproved"/>
+
+    <serviceTask id="rejected" name="Rejected" flowable:expression="${approvalOutcome.notify(execution, 'REJECTED')}"/>
+    <sequenceFlow id="toEndRejected" sourceRef="rejected" targetRef="endRejected"/>
+    <endEvent id="endRejected"/>
+  </process>
+</definitions>

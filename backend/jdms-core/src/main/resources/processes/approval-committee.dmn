@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="approvalCommittee" name="Approval committee"
+             namespace="https://jdms.jmr.com/approval">
+  <!--
+    Committee routing for committee-approval (spec §4.4): the first matching rule names the committee (by code, per
+    tenant) and the vote SLA. Inputs as in approval-stages.dmn.
+  -->
+  <decision id="approval-committee" name="Approval committee">
+    <decisionTable id="approvalCommitteeTable" hitPolicy="FIRST">
+      <input id="inDocumentType" label="Document type">
+        <inputExpression id="inDocumentTypeExpr" typeRef="string"><text>documentTypeCode</text></inputExpression>
+      </input>
+      <output id="outCommittee" label="Committee code" name="committeeCode" typeRef="string"/>
+      <output id="outSla" label="SLA hours" name="slaHours" typeRef="number"/>
+      <rule id="creditCommittee">
+        <description>Committee-approved items go to the credit committee</description>
+        <inputEntry id="creditCommitteeType"><text>-</text></inputEntry>
+        <outputEntry id="creditCommitteeCode"><text>"CREDIT_COMMITTEE"</text></outputEntry>
+        <outputEntry id="creditCommitteeSla"><text>48</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

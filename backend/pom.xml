@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.jmr.jdms</groupId>
+    <artifactId>jdms-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>JDMS Next</name>
+    <description>JDMS Next document management system: parent build</description>
+
+    <modules>
+        <module>jdms-contracts</module>
+        <module>jdms-platform</module>
+        <module>jdms-core</module>
+        <module>jdms-worker</module>
+        <module>jdms-migration</module>
+        <module>jdms-migration-e2e</module>
+        <module>jdms-perf</module>
+    </modules>
+
+    <properties>
+        <!-- ADR-0001: Java 25 -->
+        <java.version>25</java.version>
+        <maven.compiler.release>25</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Libraries not managed by Spring Boot; exact versions pinned -->
+        <spring-modulith.version>2.1.2</spring-modulith.version>
+        <archunit.version>1.5.1</archunit.version>
+        <aws-sdk.version>2.57.3</aws-sdk.version>
+        <tink.version>1.24.0</tink.version>
+        <!-- Streaming multipart parsing without temp files (ADR-0011); milestone, see the ADR -->
+        <commons-fileupload2.version>2.0.0-M5</commons-fileupload2.version>
+        <!-- Embedded BPMN + DMN engine (ADR-0013); 8.x is the line for Spring Boot 4 -->
+        <flowable.version>8.0.0</flowable.version>
+
+        <!-- Build plugins -->
+        <cyclonedx-maven-plugin.version>2.9.3</cyclonedx-maven-plugin.version>
+        <license-maven-plugin.version>2.7.1</license-maven-plugin.version>
+        <!-- Set -Dlicence.enforce=false only to list licences while updating build/licence-merges.txt -->
+        <licence.enforce>true</licence.enforce>
+
+        <!-- Container images used by Testcontainers; keep in step with deploy/docker-compose.yml -->
+        <test.image.postgres>postgres:18.6-alpine3.24</test.image.postgres>
+        <test.image.keycloak>keycloak/keycloak:26.8.1</test.image.keycloak>
+        <test.image.seaweedfs>chrislusf/seaweedfs:4.48</test.image.seaweedfs>
+        <test.image.clamav>clamav/clamav:1.5.4</test.image.clamav>
+        <test.image.opensearch>opensearchproject/opensearch:3.9.0</test.image.opensearch>
+        <!-- Tests needing infrastructure the PoC does not have yet (e.g. a WORM store, O-01); -Dtest.excludedGroups=none to run -->
+        <test.excludedGroups>requires-worm-store</test.excludedGroups>
+        <test.image.gotenberg>gotenberg/gotenberg:8.38.1</test.image.gotenberg>
+        <!-- Tika with Arabic OCR is built from deploy/tika/Dockerfile (based on apache/tika:3.3.3.0-full) -->
+        <test.tika.dockerfile>${maven.multiModuleProjectDirectory}/../deploy/tika</test.tika.dockerfile>
+
+        <!-- PDF thumbnails in the worker (ADR-0014) -->
+        <pdfbox.version>3.0.8</pdfbox.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.modulith</groupId>
+                <artifactId>spring-modulith-bom</artifactId>
+                <version>${spring-modulith.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws-sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.crypto.tink</groupId>
+                <artifactId>tink</artifactId>
+                <version>${tink.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-fileupload2-jakarta-servlet6</artifactId>
+                <version>${commons-fileupload2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-bom</artifactId>
+                <version>${flowable.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit-junit5</artifactId>
+                <version>${archunit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jmr.jdms</groupId>
+                <artifactId>jdms-contracts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jmr.jdms</groupId>
+                <artifactId>jdms-platform</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <test.image.postgres>${test.image.postgres}</test.image.postgres>
+                            <test.image.keycloak>${test.image.keycloak}</test.image.keycloak>
+                            <test.image.seaweedfs>${test.image.seaweedfs}</test.image.seaweedfs>
+                            <test.image.clamav>${test.image.clamav}</test.image.clamav>
+                            <test.image.opensearch>${test.image.opensearch}</test.image.opensearch>
+                            <test.image.gotenberg>${test.image.gotenberg}</test.image.gotenberg>
+                            <test.tika.dockerfile>${test.tika.dockerfile}</test.tika.dockerfile>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <excludedGroups>${test.excludedGroups}</excludedGroups>
+                        <systemPropertyVariables>
+                            <test.image.postgres>${test.image.postgres}</test.image.postgres>
+                            <test.image.keycloak>${test.image.keycloak}</test.image.keycloak>
+                            <test.image.seaweedfs>${test.image.seaweedfs}</test.image.seaweedfs>
+                            <test.image.clamav>${test.image.clamav}</test.image.clamav>
+                            <test.image.opensearch>${test.image.opensearch}</test.image.opensearch>
+                            <test.image.gotenberg>${test.image.gotenberg}</test.image.gotenberg>
+                            <test.tika.dockerfile>${test.tika.dockerfile}</test.tika.dockerfile>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>${cyclonedx-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${license-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- Integration tests (*IT) run in the verify phase -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+            <!-- SBOM: one aggregate CycloneDX BOM for the backend at target/bom.{json,xml} -->
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>aggregate-sbom</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <projectType>application</projectType>
+                    <outputFormat>all</outputFormat>
+                    <outputName>bom</outputName>
+                    <includeTestScope>false</includeTestScope>
+                </configuration>
+            </plugin>
+
+            <!--
+              Licence check (CLAUDE.md allow-list): fails the build when a shipped dependency has no licence
+              on the list. Test-scoped dependencies are not shipped and are not checked. Licence names as
+              published in POMs are normalised to SPDX IDs by build/licence-merges.txt (see build/README.md).
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>licence-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>add-third-party</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludedScopes>test,system</excludedScopes>
+                    <excludedGroups>^com\.jmr\.jdms$</excludedGroups>
+                    <failOnMissing>${licence.enforce}</failOnMissing>
+                    <failOnBlacklist>${licence.enforce}</failOnBlacklist>
+                    <licenseMergesUrl>file://${maven.multiModuleProjectDirectory}/build/licence-merges.txt</licenseMergesUrl>
+                    <includedLicenses>file://${maven.multiModuleProjectDirectory}/build/licence-allow-list.txt</includedLicenses>
+                    <!-- Re-evaluate on every build; otherwise an up-to-date THIRD-PARTY.txt skips the check -->
+                    <force>true</force>
+                    <thirdPartyFilename>THIRD-PARTY.txt</thirdPartyFilename>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

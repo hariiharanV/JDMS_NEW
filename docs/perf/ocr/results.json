@@ -1,0 +1,2783 @@
+{
+ "environment": {
+  "finished": "2026-10-25T18:30:54Z",
+  "pages": 48,
+  "machine": "x86_64, 2 CPUs (shared with the stack)"
+ },
+ "summary": [
+  {
+   "engine": "paddle",
+   "language": "all",
+   "quality": "all",
+   "pages": 48,
+   "cer_mean": 0.17874404296615,
+   "cer_median": 0.0899581589958159,
+   "word_recall": 0.7671223750224528,
+   "field_accuracy": 0.5875,
+   "seconds_per_page_mean": 11.221089752041735,
+   "seconds_per_page_p95": 16.054794749245048
+  },
+  {
+   "engine": "paddle",
+   "language": "ar",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.3574880859323,
+   "cer_median": 0.2512437810945274,
+   "word_recall": 0.5342447500449058,
+   "field_accuracy": 0.175,
+   "seconds_per_page_mean": 10.051264460198581,
+   "seconds_per_page_p95": 13.717492813244462
+  },
+  {
+   "engine": "paddle",
+   "language": "ar",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.2780051683253129,
+   "cer_median": 0.217421875,
+   "word_recall": 0.6427433005945904,
+   "field_accuracy": 0.225,
+   "seconds_per_page_mean": 11.24674584926106,
+   "seconds_per_page_p95": 14.293722135014832
+  },
+  {
+   "engine": "paddle",
+   "language": "ar",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.4629946913944113,
+   "cer_median": 0.44395023634453784,
+   "word_recall": 0.38892641801623307,
+   "field_accuracy": 0.125,
+   "seconds_per_page_mean": 7.940856414963491,
+   "seconds_per_page_p95": 9.77089293114841
+  },
+  {
+   "engine": "paddle",
+   "language": "ar",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.3314643980771759,
+   "cer_median": 0.232734375,
+   "word_recall": 0.571064531523894,
+   "field_accuracy": 0.175,
+   "seconds_per_page_mean": 10.966191116371192,
+   "seconds_per_page_p95": 13.717492813244462
+  },
+  {
+   "engine": "paddle",
+   "language": "en",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 12.390915043884888,
+   "seconds_per_page_p95": 16.271006519906223
+  },
+  {
+   "engine": "paddle",
+   "language": "en",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 13.962578943930566,
+   "seconds_per_page_p95": 17.9094346370548
+  },
+  {
+   "engine": "paddle",
+   "language": "en",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 10.058635245193727,
+   "seconds_per_page_p95": 13.552844312041998
+  },
+  {
+   "engine": "paddle",
+   "language": "en",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 13.151530942530371,
+   "seconds_per_page_p95": 16.054794749245048
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "all",
+   "quality": "all",
+   "pages": 48,
+   "cer_mean": 0.026585891025382846,
+   "cer_median": 0.003738957844123896,
+   "word_recall": 0.965266897215321,
+   "field_accuracy": 0.8916666666666667,
+   "seconds_per_page_mean": 2.030707284614133,
+   "seconds_per_page_p95": 3.26551306899637
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "ar",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.05137073506665607,
+   "cer_median": 0.049148915937618866,
+   "word_recall": 0.9345138119976161,
+   "field_accuracy": 0.8083333333333333,
+   "seconds_per_page_mean": 2.137689118894438,
+   "seconds_per_page_p95": 3.3071698043495417
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "ar",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.06727446156761552,
+   "cer_median": 0.07978855721393036,
+   "word_recall": 0.9301645196314878,
+   "field_accuracy": 0.85,
+   "seconds_per_page_mean": 2.322803734219633,
+   "seconds_per_page_p95": 3.690678494051099
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "ar",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.027562532410086764,
+   "cer_median": 0.019765625000000002,
+   "word_recall": 0.9469926386653562,
+   "field_accuracy": 0.775,
+   "seconds_per_page_mean": 1.9893853226676583,
+   "seconds_per_page_p95": 3.151761304587126
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "ar",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.05927521122226593,
+   "cer_median": 0.06593735866123926,
+   "word_recall": 0.926384277696004,
+   "field_accuracy": 0.8,
+   "seconds_per_page_mean": 2.1008782997960225,
+   "seconds_per_page_p95": 3.3071698043495417
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "en",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.0018010469841096162,
+   "cer_median": 0.0,
+   "word_recall": 0.9960199824330259,
+   "field_accuracy": 0.975,
+   "seconds_per_page_mean": 1.9237254503338288,
+   "seconds_per_page_p95": 3.103257603943348
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "en",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 2.1124448120826855,
+   "seconds_per_page_p95": 2.9210497848689556
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "en",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.004941886339782723,
+   "cer_median": 0.001893939393939394,
+   "word_recall": 0.9907773386034255,
+   "field_accuracy": 0.95,
+   "seconds_per_page_mean": 1.849019771325402,
+   "seconds_per_page_p95": 3.2205353854224086
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "language": "en",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.00046125461254612545,
+   "cer_median": 0.0,
+   "word_recall": 0.9972826086956522,
+   "field_accuracy": 0.975,
+   "seconds_per_page_mean": 1.8097117675933987,
+   "seconds_per_page_p95": 2.491109846159816
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "all",
+   "quality": "all",
+   "pages": 48,
+   "cer_mean": 0.028001375256448278,
+   "cer_median": 0.0028780763014241715,
+   "word_recall": 0.9556050428962646,
+   "field_accuracy": 0.8375,
+   "seconds_per_page_mean": 1.6838308799779043,
+   "seconds_per_page_p95": 2.503984880633652
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "ar",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.055234761380026615,
+   "cer_median": 0.04787991858887381,
+   "word_recall": 0.9133785091566047,
+   "field_accuracy": 0.7,
+   "seconds_per_page_mean": 1.5853142468258739,
+   "seconds_per_page_p95": 2.498896036297083
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "ar",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.067192757940467,
+   "cer_median": 0.08977611940298508,
+   "word_recall": 0.9088503366343106,
+   "field_accuracy": 0.7,
+   "seconds_per_page_mean": 1.7175014287931845,
+   "seconds_per_page_p95": 2.665022195316851
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "ar",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.03390712620069107,
+   "cer_median": 0.026363101464435146,
+   "word_recall": 0.924441865888135,
+   "field_accuracy": 0.7,
+   "seconds_per_page_mean": 1.4116180569399148,
+   "seconds_per_page_p95": 2.347014006227255
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "ar",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.06460439999892176,
+   "cer_median": 0.08227611940298507,
+   "word_recall": 0.9068433249473685,
+   "field_accuracy": 0.7,
+   "seconds_per_page_mean": 1.6268232547445223,
+   "seconds_per_page_p95": 2.498896036297083
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "en",
+   "quality": "all",
+   "pages": 24,
+   "cer_mean": 0.0007679891328699469,
+   "cer_median": 0.0,
+   "word_recall": 0.9978315766359245,
+   "field_accuracy": 0.975,
+   "seconds_per_page_mean": 1.7823475131299347,
+   "seconds_per_page_p95": 2.503984880633652
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "en",
+   "quality": "clean",
+   "pages": 8,
+   "cer_mean": 0.0,
+   "cer_median": 0.0,
+   "word_recall": 1.0,
+   "field_accuracy": 1.0,
+   "seconds_per_page_mean": 2.0812667935388163,
+   "seconds_per_page_p95": 2.8754627611488104
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "en",
+   "quality": "poor",
+   "pages": 8,
+   "cer_mean": 0.001842712786063715,
+   "cer_median": 0.0010330578512396695,
+   "word_recall": 0.9962121212121212,
+   "field_accuracy": 0.95,
+   "seconds_per_page_mean": 1.4927387152565643,
+   "seconds_per_page_p95": 2.233948202803731
+  },
+  {
+   "engine": "tesseract-lang",
+   "language": "en",
+   "quality": "scan",
+   "pages": 8,
+   "cer_mean": 0.00046125461254612545,
+   "cer_median": 0.0,
+   "word_recall": 0.9972826086956522,
+   "field_accuracy": 0.975,
+   "seconds_per_page_mean": 1.7730370305944234,
+   "seconds_per_page_p95": 2.1678394731134176
+  }
+ ],
+ "pages": [
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 1.795157008804381,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.6083712140098214,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.4037354132160544,
+   "cer": 0.003787878787878788,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": false,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 2.0014078337699175,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.811322197318077,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-salary-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.499114753678441,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.6431894758716226,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.214875003322959,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 3.103257603943348,
+   "cer": 0.026859504132231406,
+   "word_recall": 0.9565217391304348,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.9210497848689556,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.491109846159816,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-statement-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 3.2205353854224086,
+   "cer": 0.0041928721174004195,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 1.857446938753128,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 1.5428784787654877,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.4676886964589357,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 2.326077973470092,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 2.044333421625197,
+   "cer": 0.0036900369003690036,
+   "word_recall": 0.9782608695652174,
+   "fields": {
+    "name": false,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-loan-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.270424261689186,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.5818487126380205,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.3851552829146385,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.1992955934256315,
+   "cer": 0.004694835680751174,
+   "word_recall": 0.9696969696969697,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.7733807684853673,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.3796486966311932,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "en-kyc-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.6281064627692103,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 1.6314499517902732,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.698473958298564,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.7773268250748515,
+   "cer": 0.04602510460251046,
+   "word_recall": 0.926829268292683,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": false,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 2.1901872539892793,
+   "cer": 0.012605042016806723,
+   "word_recall": 0.975609756097561,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.864814360626042,
+   "cer": 0.008403361344537815,
+   "word_recall": 0.975609756097561,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-salary-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.6915636770427227,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 3.690678494051099,
+   "cer": 0.11764705882352941,
+   "word_recall": 0.8723404255319149,
+   "fields": {
+    "name": false,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 3.26551306899637,
+   "cer": 0.1111111111111111,
+   "word_recall": 0.8723404255319149,
+   "fields": {
+    "name": false,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 3.0611269529908895,
+   "cer": 0.06100217864923747,
+   "word_recall": 0.9361702127659575,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 3.2025359189137816,
+   "cer": 0.12727272727272726,
+   "word_recall": 0.8924731182795699,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 3.3071698043495417,
+   "cer": 0.05227272727272727,
+   "word_recall": 0.9247311827956989,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-statement-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 3.151761304587126,
+   "cer": 0.05227272727272727,
+   "word_recall": 0.956989247311828,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 1.9643209921196103,
+   "cer": 0.11328125,
+   "word_recall": 0.8809523809523809,
+   "fields": {
+    "name": false,
+    "loan": true,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 2.0289341462776065,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.7800709884613752,
+   "cer": 0.01953125,
+   "word_recall": 0.9523809523809523,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 2.251599551178515,
+   "cer": 0.0078125,
+   "word_recall": 0.9761904761904762,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 1.752378367818892,
+   "cer": 0.1328125,
+   "word_recall": 0.8571428571428571,
+   "fields": {
+    "name": false,
+    "loan": true,
+    "cif": false,
+    "amount": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-loan-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.5991755658760667,
+   "cer": 0.01171875,
+   "word_recall": 0.9285714285714286,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.8208128763362765,
+   "cer": 0.0845771144278607,
+   "word_recall": 0.90625,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.5340515412390232,
+   "cer": 0.07960199004975124,
+   "word_recall": 0.90625,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.6226356569677591,
+   "cer": 0.009950248756218905,
+   "word_recall": 0.9375,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.8308448353782296,
+   "cer": 0.075,
+   "word_recall": 0.9375,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.3556911507621408,
+   "cer": 0.09,
+   "word_recall": 0.875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-eng+ara",
+   "page": "ar-kyc-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.231421610340476,
+   "cer": 0.02,
+   "word_recall": 0.9375,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 2.03454621322453,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.6716164397075772,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.4227839354425669,
+   "cer": 0.003787878787878788,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": false,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 2.2779148165136576,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.9491793774068356,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-salary-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.4061323339119554,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.503984880633652,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.1678394731134176,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 2.233948202803731,
+   "cer": 0.002066115702479339,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.8754627611488104,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.1169387539848685,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-statement-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 1.8317477582022548,
+   "cer": 0.0041928721174004195,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 2.0476134922355413,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 1.4878681115806103,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.394757223315537,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 1.7201587613672018,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 2.028557467274368,
+   "cer": 0.0036900369003690036,
+   "word_recall": 0.9782608695652174,
+   "fields": {
+    "name": false,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-loan-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.3018262702971697,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.6664410317316651,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.4841957036405802,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.2562369899824262,
+   "cer": 0.004694835680751174,
+   "word_recall": 0.9696969696969697,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.5240123914554715,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.27810091804713,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "en-kyc-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.0944770080968738,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 1.5351558970287442,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.647580549120903,
+   "cer": 0.008368200836820083,
+   "word_recall": 0.975609756097561,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.4554304527118802,
+   "cer": 0.029288702928870293,
+   "word_recall": 0.9512195121951219,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": false,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 1.286957916803658,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 1.2759163901209831,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-salary-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 1.0930309873074293,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.665022195316851,
+   "cer": 0.12418300653594772,
+   "word_recall": 0.851063829787234,
+   "fields": {
+    "name": false,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.4700422631576657,
+   "cer": 0.11328976034858387,
+   "word_recall": 0.8617021276595744,
+   "fields": {
+    "name": false,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 2.347014006227255,
+   "cer": 0.08714596949891068,
+   "word_recall": 0.8617021276595744,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 2.1921002781018615,
+   "cer": 0.09318181818181819,
+   "word_recall": 0.8602150537634409,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 2.498896036297083,
+   "cer": 0.075,
+   "word_recall": 0.8817204301075269,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-statement-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 1.8204252244904637,
+   "cer": 0.0659090909090909,
+   "word_recall": 0.8817204301075269,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 1.722595738247037,
+   "cer": 0.11328125,
+   "word_recall": 0.8571428571428571,
+   "fields": {
+    "name": false,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 1.3979345727711916,
+   "cer": 0.0234375,
+   "word_recall": 0.9523809523809523,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.2052989592775702,
+   "cer": 0.015625,
+   "word_recall": 0.9523809523809523,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 1.5018795561045408,
+   "cer": 0.02734375,
+   "word_recall": 0.9523809523809523,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 1.391336084343493,
+   "cer": 0.1171875,
+   "word_recall": 0.8333333333333334,
+   "fields": {
+    "name": false,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-loan-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 1.4019515682011843,
+   "cer": 0.0234375,
+   "word_recall": 0.9047619047619048,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.3613780280575156,
+   "cer": 0.08955223880597014,
+   "word_recall": 0.875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.1595813240855932,
+   "cer": 0.08955223880597014,
+   "word_recall": 0.875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 0.9416431477293372,
+   "cer": 0.029850746268656716,
+   "word_recall": 0.90625,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 1.4749218206852674,
+   "cer": 0.09,
+   "word_recall": 0.875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 1.1732988180592656,
+   "cer": 0.09,
+   "word_recall": 0.875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "tesseract-lang",
+   "page": "ar-kyc-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 1.0281501095741987,
+   "cer": 0.02,
+   "word_recall": 0.9375,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": true,
+    "cif": false,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 12.152855071239173,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 12.568520511500537,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 9.91062455996871,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 13.46422671712935,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 12.435762440785766,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-salary-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 9.771069372072816,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "civil_id": true,
+    "amount": true,
+    "account": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 16.271006519906223,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 14.898369774222374,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 12.471815385855734,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 17.9094346370548,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 16.054794749245048,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-statement-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 13.552844312041998,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "cif": true,
+    "account": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 13.794095425866544,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 12.916681395843625,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 9.898730179294944,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 13.898850521072745,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 12.541038746014237,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-loan-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 8.902830612845719,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "loan": true,
+    "cif": true,
+    "amount": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-1-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 12.188080317340791,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-1-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 11.697858381085098,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-1-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 8.335606723092496,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-2-clean",
+   "language": "en",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 12.022082341834903,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-2-scan",
+   "language": "en",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 12.099221541546285,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "en-kyc-2-poor",
+   "language": "en",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 7.625560816377401,
+   "cer": 0.0,
+   "word_recall": 1.0,
+   "fields": {
+    "name": true,
+    "passport": true,
+    "civil_id": true,
+    "cif": true,
+    "date": true
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 11.08952787425369,
+   "cer": 0.1799163179916318,
+   "word_recall": 0.7317073170731707,
+   "fields": {
+    "name": true,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 9.81346478778869,
+   "cer": 0.2217573221757322,
+   "word_recall": 0.7073170731707317,
+   "fields": {
+    "name": true,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 7.194530063308775,
+   "cer": 0.5690376569037657,
+   "word_recall": 0.24390243902439024,
+   "fields": {
+    "name": false,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "salary",
+   "seconds": 10.69287235289812,
+   "cer": 0.18907563025210083,
+   "word_recall": 0.7804878048780488,
+   "fields": {
+    "name": true,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "salary",
+   "seconds": 10.180565798655152,
+   "cer": 0.21008403361344538,
+   "word_recall": 0.7317073170731707,
+   "fields": {
+    "name": true,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-salary-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "salary",
+   "seconds": 7.42649878654629,
+   "cer": 0.5168067226890757,
+   "word_recall": 0.2682926829268293,
+   "fields": {
+    "name": false,
+    "civil_id": false,
+    "amount": false,
+    "account": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 14.293722135014832,
+   "cer": 0.4684095860566449,
+   "word_recall": 0.3617021276595745,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 13.076786804944277,
+   "cer": 0.6339869281045751,
+   "word_recall": 0.23404255319148937,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 9.219158214516938,
+   "cer": 0.690631808278867,
+   "word_recall": 0.1702127659574468,
+   "fields": {
+    "name": false,
+    "cif": false,
+    "account": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "statement",
+   "seconds": 13.242462653666735,
+   "cer": 0.5159090909090909,
+   "word_recall": 0.3870967741935484,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": false,
+    "amount": true,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "statement",
+   "seconds": 13.717492813244462,
+   "cer": 0.6568181818181819,
+   "word_recall": 0.22580645161290322,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-statement-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "statement",
+   "seconds": 9.77089293114841,
+   "cer": 0.7,
+   "word_recall": 0.20430107526881722,
+   "fields": {
+    "name": true,
+    "cif": false,
+    "account": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 10.700269734486938,
+   "cer": 0.20703125,
+   "word_recall": 0.7142857142857143,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 10.673479166813195,
+   "cer": 0.21484375,
+   "word_recall": 0.7142857142857143,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 7.5933948224410415,
+   "cer": 0.37109375,
+   "word_recall": 0.4523809523809524,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "loan",
+   "seconds": 10.008928284980357,
+   "cer": 0.21484375,
+   "word_recall": 0.6666666666666666,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "loan",
+   "seconds": 10.640869608148932,
+   "cer": 0.23046875,
+   "word_recall": 0.6428571428571429,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-loan-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "loan",
+   "seconds": 7.287497512996197,
+   "cer": 0.34765625,
+   "word_recall": 0.42857142857142855,
+   "fields": {
+    "name": true,
+    "loan": false,
+    "cif": false,
+    "amount": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-1-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 9.450914180837572,
+   "cer": 0.22885572139303484,
+   "word_recall": 0.78125,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-1-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 9.803402035497129,
+   "cer": 0.24875621890547264,
+   "word_recall": 0.625,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-1-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 7.35948637034744,
+   "cer": 0.2537313432835821,
+   "word_recall": 0.6875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-2-clean",
+   "language": "ar",
+   "quality": "clean",
+   "template": "kyc",
+   "seconds": 10.49526957795024,
+   "cer": 0.22,
+   "word_recall": 0.71875,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-2-scan",
+   "language": "ar",
+   "quality": "scan",
+   "template": "kyc",
+   "seconds": 9.8234679158777,
+   "cer": 0.235,
+   "word_recall": 0.6875,
+   "fields": {
+    "name": false,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  },
+  {
+   "engine": "paddle",
+   "page": "ar-kyc-2-poor",
+   "language": "ar",
+   "quality": "poor",
+   "template": "kyc",
+   "seconds": 7.675392618402839,
+   "cer": 0.255,
+   "word_recall": 0.65625,
+   "fields": {
+    "name": true,
+    "passport": false,
+    "civil_id": false,
+    "cif": false,
+    "date": false
+   }
+  }
+ ]
+}

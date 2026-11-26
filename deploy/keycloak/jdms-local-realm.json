@@ -1,0 +1,1074 @@
+{
+  "realm": "jdms-local",
+  "displayName": "JDMS Next (local development)",
+  "loginTheme": "jdms",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "bruteForceProtected": true,
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "internationalizationEnabled": true,
+  "supportedLocales": [
+    "en",
+    "ar"
+  ],
+  "defaultLocale": "en",
+  "roles": {
+    "realm": [
+      {
+        "name": "MAKER",
+        "description": "Uploads and indexes documents"
+      },
+      {
+        "name": "CHECKER",
+        "description": "Approves or rejects documents, metadata changes and deletions"
+      },
+      {
+        "name": "COMMITTEE_MEMBER",
+        "description": "Votes on items routed to a committee stage"
+      },
+      {
+        "name": "VIEWER",
+        "description": "Searches and views documents within scope"
+      },
+      {
+        "name": "RECORDS_OFFICER",
+        "description": "Manages retention policies, legal holds and disposition"
+      },
+      {
+        "name": "TENANT_ADMIN",
+        "description": "Manages cabinets, document types, fields, LOVs and workflow assignment"
+      },
+      {
+        "name": "SECURITY_ADMIN",
+        "description": "Manages roles, access rules, user branch scope and clearance"
+      },
+      {
+        "name": "INTEGRATION_CLIENT",
+        "description": "Bank system calling the integration API"
+      },
+      {
+        "name": "MIGRATION",
+        "description": "Legacy JDMS migration client (ADR-0020)"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "jdms-web",
+      "name": "JDMS Next web application",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:5180/*",
+        "${JDMS_WEB_PUBLIC_URL}/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5180",
+        "${JDMS_WEB_PUBLIC_URL}"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5180/*##${JDMS_WEB_PUBLIC_URL}/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "tenant",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "tenant",
+            "claim.name": "tenant",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "branch_scope",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "branch_scope",
+            "claim.name": "branch_scope",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "home_branch",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "home_branch",
+            "claim.name": "home_branch",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "clearance",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "clearance",
+            "claim.name": "clearance",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "claim.name": "roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "jdms-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "jdms-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "jdms-integration-test",
+      "name": "Integration test client (mock FLEXCUBE caller)",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "${JDMS_INTEGRATION_TEST_CLIENT_SECRET}",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "protocolMappers": [
+        {
+          "name": "tenant",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "tenant",
+            "claim.name": "tenant",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "branch_scope",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "branch_scope",
+            "claim.name": "branch_scope",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "home_branch",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "home_branch",
+            "claim.name": "home_branch",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "clearance",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "clearance",
+            "claim.name": "clearance",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "claim.name": "roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "jdms-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "jdms-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "client_id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "claim.name": "client_id",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "jdms-migration",
+      "name": "Legacy JDMS migration tool (ADR-0020)",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "${JDMS_MIGRATION_CLIENT_SECRET}",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "protocolMappers": [
+        {
+          "name": "tenant",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "tenant",
+            "claim.name": "tenant",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "branch_scope",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "branch_scope",
+            "claim.name": "branch_scope",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "home_branch",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "home_branch",
+            "claim.name": "home_branch",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "clearance",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "clearance",
+            "claim.name": "clearance",
+            "jsonType.label": "String",
+            "multivalued": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "claim.name": "roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "jdms-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "jdms-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "client_id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "claim.name": "client_id",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "maker1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "maker1@example.org",
+      "firstName": "Mona",
+      "lastName": "Maker",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "001"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "MAKER"
+      ],
+      "id": "f6fc1397-16fb-5fb6-a19a-ece01422f7cc"
+    },
+    {
+      "username": "checker1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "checker1@example.org",
+      "firstName": "Chris",
+      "lastName": "Checker",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "001",
+          "002"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "CHECKER"
+      ],
+      "id": "eb144035-8695-592a-9f70-acd97bb2227d"
+    },
+    {
+      "username": "viewer1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "viewer1@example.org",
+      "firstName": "Vera",
+      "lastName": "Viewer",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "002"
+        ],
+        "home_branch": [
+          "002"
+        ],
+        "clearance": [
+          "INTERNAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "VIEWER"
+      ],
+      "id": "af4d090a-e8a7-52b6-9d44-511bfd1ec84c"
+    },
+    {
+      "username": "records1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "records1@example.org",
+      "firstName": "Rami",
+      "lastName": "Records",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "RECORDS_OFFICER"
+      ],
+      "id": "059cf42a-0756-5a2f-98f5-b1e83d0bdf5a"
+    },
+    {
+      "username": "tenantadmin1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "tenantadmin1@example.org",
+      "firstName": "Tara",
+      "lastName": "Admin",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "TENANT_ADMIN"
+      ],
+      "id": "5c27ceb9-77f5-57e0-a9bb-661f0bc27e4f"
+    },
+    {
+      "username": "secadmin1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "secadmin1@example.org",
+      "firstName": "Sami",
+      "lastName": "Security",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "SECURITY_ADMIN"
+      ],
+      "id": "17e20a07-dab0-5d27-a669-8b983020a1d9"
+    },
+    {
+      "username": "tenantadmin2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "tenantadmin2@example.org",
+      "firstName": "Tariq",
+      "lastName": "Admin",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "TENANT_ADMIN"
+      ],
+      "id": "b635880d-ad21-5a0e-b25a-97093901f89b"
+    },
+    {
+      "username": "secadmin2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "secadmin2@example.org",
+      "firstName": "Salma",
+      "lastName": "Security",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "SECURITY_ADMIN"
+      ],
+      "id": "534d7d05-480f-5e5b-9c52-52199848879f"
+    },
+    {
+      "username": "committee1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "committee1@example.org",
+      "firstName": "Kamal",
+      "lastName": "Committee",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "COMMITTEE_MEMBER"
+      ],
+      "id": "c86d12a3-f410-5b84-a81e-43bf81d41046"
+    },
+    {
+      "username": "committee2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "committee2@example.org",
+      "firstName": "Layla",
+      "lastName": "Committee",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "COMMITTEE_MEMBER"
+      ],
+      "id": "7e4d5c9a-25ed-57f1-8dd4-dd952692ddab"
+    },
+    {
+      "username": "committee3",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "committee3@example.org",
+      "firstName": "Omar",
+      "lastName": "Committee",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "COMMITTEE_MEMBER"
+      ],
+      "id": "bf8547ee-5631-5efb-9f8f-6ed9a4743e87"
+    },
+    {
+      "username": "bank2user1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "bank2user1@example.org",
+      "firstName": "Bilal",
+      "lastName": "Bank Two",
+      "attributes": {
+        "tenant": [
+          "BANK2"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "MAKER",
+        "VIEWER"
+      ],
+      "id": "4e8cb855-b153-54a4-a4bc-940f5f9e5167"
+    },
+    {
+      "username": "perfviewer1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfviewer1@example.org",
+      "firstName": "Pat",
+      "lastName": "Viewer",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "VIEWER"
+      ],
+      "id": "0191e1e4-ff9b-5b83-8969-ef44a04fa2e0"
+    },
+    {
+      "username": "perfbranch1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfbranch1@example.org",
+      "firstName": "Bram",
+      "lastName": "Branch",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "002",
+          "003",
+          "004"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "INTERNAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "VIEWER"
+      ],
+      "id": "6da15871-f939-5924-a15d-c0018027ec53"
+    },
+    {
+      "username": "perfmaker1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfmaker1@example.org",
+      "firstName": "Mira",
+      "lastName": "Maker",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "MAKER"
+      ],
+      "id": "6feea4db-2413-5b8f-8f73-5fb5a83bb7d2"
+    },
+    {
+      "username": "perfadmin1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfadmin1@example.org",
+      "firstName": "Ada",
+      "lastName": "Admin",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "TENANT_ADMIN"
+      ],
+      "id": "663a6f81-dac5-530b-99a5-bc5c501d5c91"
+    },
+    {
+      "username": "perfsec1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfsec1@example.org",
+      "firstName": "Sam",
+      "lastName": "Security",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "SECURITY_ADMIN"
+      ],
+      "id": "cd707bd1-5d18-5d00-836a-38e8ba61b271"
+    },
+    {
+      "username": "perfsec2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "perfsec2@example.org",
+      "firstName": "Sol",
+      "lastName": "Security",
+      "attributes": {
+        "tenant": [
+          "PERF"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "${JDMS_DEV_USER_PASSWORD}",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "SECURITY_ADMIN"
+      ],
+      "id": "7964a79a-b9cc-56aa-bb4f-129c1146f97b"
+    },
+    {
+      "username": "service-account-jdms-integration-test",
+      "enabled": true,
+      "serviceAccountClientId": "jdms-integration-test",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "realmRoles": [
+        "INTEGRATION_CLIENT"
+      ],
+      "id": "857f5c27-94cf-5c23-96ed-9c36cecf2724"
+    },
+    {
+      "username": "service-account-jdms-migration",
+      "enabled": true,
+      "serviceAccountClientId": "jdms-migration",
+      "attributes": {
+        "tenant": [
+          "BANK1"
+        ],
+        "branch_scope": [
+          "ALL"
+        ],
+        "home_branch": [
+          "001"
+        ],
+        "clearance": [
+          "RESTRICTED"
+        ]
+      },
+      "realmRoles": [
+        "MIGRATION",
+        "TENANT_ADMIN",
+        "SECURITY_ADMIN"
+      ],
+      "id": "4fe38808-bcec-5763-96f9-0661c8673a49"
+    }
+  ],
+  "components": {
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {
+          "kc.user.profile.config": [
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"tenant\",\"displayName\":\"Tenant code\",\"validations\":{\"pattern\":{\"pattern\":\"^[A-Z0-9_]{2,30}$\",\"error-message\":\"Tenant code: 2-30 of A-Z, 0-9, _\"}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false,\"group\":\"jdms\"},{\"name\":\"branch_scope\",\"displayName\":\"Branch scope (ALL or branch codes)\",\"validations\":{\"pattern\":{\"pattern\":\"^(ALL|[A-Za-z0-9_-]{1,30})$\",\"error-message\":\"ALL or a branch code\"}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":true,\"group\":\"jdms\"},{\"name\":\"home_branch\",\"displayName\":\"Home branch code\",\"validations\":{\"pattern\":{\"pattern\":\"^[A-Za-z0-9_-]{1,30}$\",\"error-message\":\"Branch code\"}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false,\"group\":\"jdms\"},{\"name\":\"clearance\",\"displayName\":\"Clearance\",\"validations\":{\"options\":{\"options\":[\"PUBLIC\",\"INTERNAL\",\"CONFIDENTIAL\",\"RESTRICTED\"]}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false,\"group\":\"jdms\"}],\"groups\":[{\"name\":\"jdms\",\"displayHeader\":\"JDMS Next\",\"displayDescription\":\"Tenant and access attributes; editable by administrators only\"}]}"
+          ]
+        }
+      }
+    ]
+  }
+}
